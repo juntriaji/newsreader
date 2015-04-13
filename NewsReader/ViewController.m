@@ -14,6 +14,7 @@
 #import "ViewControllerCell.h"
 #import "WebViewController.h"
 #import "EditFeed.h"
+#import "ODRefreshControl.h"
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate, ViewControllerCellDelegate>
 
@@ -23,6 +24,8 @@
 @property (nonatomic) WebViewController *webViewVC;
 @property (nonatomic) EditFeed *editFeed;
 @property (nonatomic) FeedModel *feedModel;
+@property (nonatomic) ODRefreshControl *refreshControl;
+
 @end
 
 @implementation ViewController
@@ -53,6 +56,9 @@
     
     _editFeed = [_storyBoard instantiateViewControllerWithIdentifier:@"EditFeed"];
     
+    _refreshControl = [[ODRefreshControl alloc] initInScrollView:_myTableView];
+    [_refreshControl addTarget:self action:@selector(refreshAction:) forControlEvents:UIControlEventValueChanged];
+    
 }
 
 
@@ -60,6 +66,18 @@
 {
     [_myTableView reloadData];
     //[_webViewVC.webView reload];
+}
+
+- (void)refreshAction:(id)sender
+{
+    [_myTableView reloadData];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(timerStop:) userInfo:nil repeats:NO];
+}
+
+- (void)timerStop:(id)sender
+{
+    [_refreshControl endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {

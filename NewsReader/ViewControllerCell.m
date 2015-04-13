@@ -18,37 +18,19 @@
 
 @end
 
+
 @implementation ViewControllerCell
 
 - (void)awakeFromNib {
-    // Initialization code
-    /*
-    NSURL *urlImage = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.poems.co.id/image/patterns/%@.png", [arr objectAtIndex:0]]];
-    
-    [self downloadImageWithURL:urlImage completionBlock:^(BOOL succeeded, UIImage *image) {
-        if (succeeded) {
-            CGRect frame = cell.imageVw.frame;
-            frame.size.height = image.size.height;
-            frame.size.width  = image.size.width;
-            frame.origin.y = (cell.contentView.frame.size.height - image.size.height)/ 2;
-            cell.imageVw.frame = frame;
-            cell.imageVw.image = image;
-        }
-    }];
-     */
     _request = [[HttpRequest alloc] init];
     _request.delegate = self;
-    
-    //[_request getRSSFeed:_feedURL.feedURL];
-    
 }
 
 
 - (void)getRSSFeedData:(NSArray *)datas
 {
-    
     _arrData = [NSArray arrayWithArray:datas];
-    [datas enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [_arrData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
         FeedData *fData = (FeedData*)obj;
         ItemView *item = (ItemView*)[[[NSBundle mainBundle] loadNibNamed:@"ItemView" owner:self options:nil] firstObject];
@@ -62,8 +44,9 @@
         item.labelTitle.text = [fData.title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         item.urlTarget = [fData.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         item.delegate = self;
-
+        
         _scrollView.contentSize = CGSizeMake(CGRectGetMaxX(item.frame), _scrollView.frame.size.height);
+        
     }];
 
 }

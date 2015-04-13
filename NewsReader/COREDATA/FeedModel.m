@@ -111,6 +111,7 @@
             fromDB = fromUI;
         }];
         
+        
         if(![_managedObjectContext save:&error]){
             NSLog(@"Whoops error ndeng...%@", error.localizedDescription);
         }

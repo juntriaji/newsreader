@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		290A2F091ADB79AC0050E2C5 /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 290A2F081ADB79AC0050E2C5 /* ODRefreshControl.m */; };
 		77BBFF621AD8CF9700E867E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77BBFF611AD8CF9700E867E4 /* main.m */; };
 		77BBFF651AD8CF9700E867E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77BBFF641AD8CF9700E867E4 /* AppDelegate.m */; };
 		77BBFF681AD8CF9700E867E4 /* NewsReader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77BBFF661AD8CF9700E867E4 /* NewsReader.xcdatamodeld */; };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		290A2F071ADB79AC0050E2C5 /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODRefreshControl.h; path = UTIL/ODRefreshControl.h; sourceTree = "<group>"; };
+		290A2F081ADB79AC0050E2C5 /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODRefreshControl.m; path = UTIL/ODRefreshControl.m; sourceTree = "<group>"; };
 		77BBFF5C1AD8CF9700E867E4 /* NewsReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77BBFF601AD8CF9700E867E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77BBFF611AD8CF9700E867E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 		77CCE3111AD8FF2B001F086A /* UTIL */ = {
 			isa = PBXGroup;
 			children = (
+				290A2F071ADB79AC0050E2C5 /* ODRefreshControl.h */,
+				290A2F081ADB79AC0050E2C5 /* ODRefreshControl.m */,
 				77CCE3351ADA207F001F086A /* ColorUtil.h */,
 				77CCE3361ADA207F001F086A /* ColorUtil.m */,
 				77CCE3371ADA207F001F086A /* GraphUtil.h */,
@@ -341,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				290A2F091ADB79AC0050E2C5 /* ODRefreshControl.m in Sources */,
 				77CCE31E1AD91DC3001F086A /* ViewControllerCell.m in Sources */,
 				77CCE31A1AD91084001F086A /* FeedData.m in Sources */,
 				77CCE32F1ADA18F2001F086A /* EditFeedCell.m in Sources */,
