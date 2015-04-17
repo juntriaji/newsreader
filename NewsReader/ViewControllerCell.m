@@ -24,6 +24,7 @@
 - (void)awakeFromNib {
     _request = [[HttpRequest alloc] init];
     _request.delegate = self;
+    //NSLog(@"%lu", (unsigned long)_scrollView.subviews.count);
 }
 
 
@@ -35,10 +36,17 @@
         FeedData *fData = (FeedData*)obj;
         ItemView *item = (ItemView*)[[[NSBundle mainBundle] loadNibNamed:@"ItemView" owner:self options:nil] firstObject];
         item.frame = CGRectMake(item.frame.size.width * idx, 0, item.frame.size.width, _scrollView.frame.size.height);
+        item.hidden = YES;
         [_scrollView addSubview:item];
         
         [self downloadImageWithURL:[NSURL URLWithString:fData.media] completionBlock:^(BOOL succeeded, UIImage *image) {
             item.imgView.image = image;
+            [UIView transitionWithView:item
+                              duration:0.6
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:^{
+                                item.hidden = NO;
+                            } completion:nil];
         }];
         
         item.labelTitle.text = [fData.title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -48,6 +56,7 @@
         _scrollView.contentSize = CGSizeMake(CGRectGetMaxX(item.frame), _scrollView.frame.size.height);
         
     }];
+    //NSLog(@"%lu", (unsigned long) _scrollView.subviews.count);
 
 }
 
