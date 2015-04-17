@@ -195,7 +195,16 @@
 - (void)getRSSFeedURL:(NSString *)strURL
 {
     [self.view bringSubviewToFront:_webViewVC.view];
-    [_webViewVC.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:strURL]]];
+    
+    [UIView transitionWithView:self.view
+                      duration:0.5f
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        _webViewVC.view.hidden = NO;
+                    } completion:^(BOOL finished) {
+                        [_webViewVC.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:strURL]]];
+                    }];
+
 }
 
 @end

@@ -10,6 +10,8 @@
 
 @interface WebViewController () <UIWebViewDelegate>
 
+@property (nonatomic) UIActivityIndicatorView *activityIndicator;
+
 @end
 
 @implementation WebViewController
@@ -17,6 +19,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    [self.view addSubview:_activityIndicator];
+    [self.view bringSubviewToFront:_activityIndicator];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didRotate:)
+                                                 name:@"UIDeviceOrientationDidChangeNotification"
+                                               object:nil];
+
+}
+
+- (void)didRotate:(id)sender
+{
+    _activityIndicator.center = self.view.center;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,7 +55,7 @@
 {
 
     [UIView transitionWithView:self.view
-                      duration:1.0f
+                      duration:0.5f
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
                         self.view.hidden = YES;
@@ -46,14 +63,14 @@
 
 }
 
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [_activityIndicator startAnimating];
+}
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [UIView transitionWithView:self.view
-                      duration:1.0f
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{
-                        self.view.hidden = NO;
-                    } completion:nil];
+    [_activityIndicator stopAnimating];
 }
 
 @end
