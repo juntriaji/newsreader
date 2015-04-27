@@ -15,8 +15,11 @@
 #import "WebViewController.h"
 #import "EditFeed.h"
 #import "ODRefreshControl.h"
+#import "ColorUtil.h"
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate, ViewControllerCellDelegate>
+
+@property (nonatomic) IBOutlet UIView *viewHeader;
 
 @property (nonatomic) IBOutlet UITableView *myTableView;
 @property (nonatomic) NSArray *feeds;
@@ -58,6 +61,8 @@
     
     _refreshControl = [[ODRefreshControl alloc] initInScrollView:_myTableView];
     [_refreshControl addTarget:self action:@selector(refreshAction:) forControlEvents:UIControlEventValueChanged];
+    
+    [_viewHeader setBackgroundColor:[ColorUtil colorFromHexString:@"#1293c9"]];
     
 }
 
@@ -174,7 +179,7 @@
     
     UILabel *tempLabel=[[UILabel alloc]initWithFrame:CGRectMake(5,0,300,30)];
     tempLabel.backgroundColor=[UIColor clearColor];
-    tempLabel.textColor = [UIColor whiteColor]; //here you can change the text color of header.
+    tempLabel.textColor = [UIColor darkGrayColor]; //here you can change the text color of header.
     FeedURL *feed = [_feeds objectAtIndex:section];
     tempLabel.text = feed.feedTitle;
     [tempView addSubview:tempLabel];
