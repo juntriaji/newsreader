@@ -109,6 +109,7 @@
             FeedURL *fromUI = (FeedURL*)[feedArray objectAtIndex:idx];
             
             fromDB = fromUI;
+            
         }];
         
         
