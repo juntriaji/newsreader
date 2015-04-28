@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "FeedModel.h"
-#import <Parse/Parse.h>
+//#import <Parse/Parse.h>
 
 @interface AppDelegate ()
 
