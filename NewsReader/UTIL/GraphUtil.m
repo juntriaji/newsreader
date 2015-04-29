@@ -8,7 +8,6 @@
 
 #import "GraphUtil.h"
 #import <QuartzCore/QuartzCore.h>
-#import <UIKit/UIKit.h> 
 
 @implementation GraphUtil
 
@@ -56,131 +55,7 @@
     [view.layer addSublayer:bottomBorder];
 }
 
-+ (UIImage*)buttonGrey
-{
-    return [[UIImage imageNamed:@"btn_grey_30.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
-}
 
-+ (UIImage*)buttonGreyBig
-{
-    return [[UIImage imageNamed:@"btn_gray_22x40.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 20, 5)];
-}
-
-+ (UIImage*)buttonDarkGreyBig
-{
-    return [[UIImage imageNamed:@"btn_darkgray_22x40.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
-}
-
-+ (UIImage*)buttonDarkGrey
-{
-    return [[UIImage imageNamed:@"btn_darkgray_22x30.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
-}
-
-+ (UIImage*)buttonRed
-{
-    return [[UIImage imageNamed:@"btn_red_30.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(7, 7, 7, 7)];
-}
-
-+ (UIImage*)buttonBlue
-{
-    return [[UIImage imageNamed:@"btn_blue_30.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
-}
-
-+ (UIImage*)buttonRed64
-{
-    return [[UIImage imageNamed:@"btn_red_64.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
-}
-
-
-+ (UIImage*)buttonGreen
-{
-    return [[UIImage imageNamed:@"btn_green_30.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
-}
-
-+ (UIImage*)buttonSelectGrey
-{
-    return [[UIImage imageNamed:@"btn_select_grey_30.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 27)];
-}
-
-+ (void)setButtonGreySelect:(UIButton*)button
-{
-    [button setBackgroundImage:[self buttonSelectGrey] forState:UIControlStateNormal];
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 25);
-}
-
-+ (void)setButtonGrey:(UIButton*)button
-{
-    [button setBackgroundImage:[self buttonGrey] forState:UIControlStateNormal];
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 5);
-}
-
-+ (void)setButtonRed64:(UIButton*)button
-{
-    [button setBackgroundImage:[self buttonRed64] forState:UIControlStateNormal];
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 5);
-}
-
-+ (void)setButtonGreyBig:(UIButton*)button
-{
-    [button setBackgroundImage:[self buttonGreyBig] forState:UIControlStateNormal];
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 5);
-}
-
-+ (void)setButtonDarkGreyBig:(UIButton*)button
-{
-    [button setBackgroundImage:[self buttonDarkGreyBig] forState:UIControlStateNormal];
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 5);
-}
-
-+ (void)setButtonDarkGrey:(UIButton*)button
-{
-    [button setBackgroundImage:[self buttonDarkGrey] forState:UIControlStateNormal];
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 5);
-}
-
-+ (void)setButtonRed:(UIButton*)button
-{
-    [button setBackgroundImage:[self buttonRed] forState:UIControlStateNormal];
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 5);
-}
-
-+ (void)setButtonBlue:(UIButton*)button
-{
-    [button setBackgroundImage:[self buttonBlue] forState:UIControlStateNormal];
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 5);
-}
-
-+ (void)setButtonGreen:(UIButton*)button
-{
-    [button setBackgroundImage:[self buttonGreen] forState:UIControlStateNormal];
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 5);
-}
-
-
-#pragma mark - Bid/Ask button
-+ (void)setBidAskButton:(UIButton*)button upDown:(u_int8_t)upDown
-{
-    UIImage *btnImage;
-    if(upDown == 0)
-        btnImage = [[UIImage imageNamed:@"price_down.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
-    else if(upDown == 1)
-        btnImage = [[UIImage imageNamed:@"price_up.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
-    else
-        btnImage = [[UIImage imageNamed:@"price_mid.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
-    button.contentEdgeInsets = UIEdgeInsetsMake(0, 1, 0, 1);
-    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    
-    if([button.titleLabel.text isEqualToString:@"-"])
-    {
-        [button setUserInteractionEnabled:NO];
-        [button setBackgroundImage:nil forState:UIControlStateNormal];
-    }
-    else
-    {
-        [button setUserInteractionEnabled:YES];
-        [button setBackgroundImage:btnImage forState:UIControlStateNormal];
-    }
-}
 
 #pragma mark - Color From Hex credit goes to Dave DeLong
 
@@ -244,6 +119,55 @@
     return image;
 }
 
++ (UIImage *)imageWithColor:(UIColor *)color andSize:(CGSize)size
+{
+    CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+
++ (void)createBordersWithCorderRadius:(UIView*)view color:(UIColor*)color radius:(CGFloat)radius withBorderSize:(CGFloat)borderSize
+{
+    view.clipsToBounds = YES;
+    view.layer.borderWidth = borderSize;
+    view.layer.cornerRadius = radius;
+    view.layer.borderColor = [color CGColor];
+}
+
+
++ (void)createButtonShadow:(UIButton*)button withBgColor:(UIColor*)bgcolor withBorderColor:(UIColor*)bordercolor
+{
+    [button setBackgroundColor:[UIColor clearColor]];
+    [button setBackgroundImage:[GraphUtil imageWithColor:bgcolor] forState:UIControlStateNormal];
+    [GraphUtil createBordersWithCorderRadius:button color:bordercolor radius:5.0f withBorderSize:1.5f];
+    button.layer.masksToBounds = NO;
+    button.layer.shadowColor = [UIColor blackColor].CGColor;
+    button.layer.shadowOpacity = 0.9;
+    button.layer.shadowOffset = CGSizeMake(0.0, 3.0);
+
+}
+
++ (void)createCornerRadius:(UIView*)view radius:(CGSize)radius rectCorner:(UIRectCorner)rectCorner
+{
+    UIBezierPath *maskPath;
+    maskPath = [UIBezierPath bezierPathWithRoundedRect:view.bounds
+                                     byRoundingCorners:rectCorner
+                                           cornerRadii:CGSizeMake(radius.height, radius.width)];
+    
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = view.bounds;
+    maskLayer.path = maskPath.CGPath;
+    view.layer.mask = maskLayer;
+}
 
 
 

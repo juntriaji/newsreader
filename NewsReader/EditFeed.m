@@ -29,7 +29,7 @@
     _feedModel = [[FeedModel alloc] init];
     
     [_buttonOK setBackgroundImage:[GraphUtil imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
-    
+    [GraphUtil createButtonShadow:_buttonOK withBgColor:[UIColor redColor] withBorderColor:[UIColor clearColor]];
 }
 
 - (void)didReceiveMemoryWarning {
