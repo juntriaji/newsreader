@@ -108,10 +108,7 @@
             FeedURL *fromDB = (FeedURL*)obj;
             FeedURL *fromUI = (FeedURL*)[feedArray objectAtIndex:idx];
             
-            //fromDB = fromUI; <=== why this is dead store?
-            fromDB.feedTitle = fromUI.feedTitle;
-            fromDB.feedURL = fromUI.feedURL;
-            fromDB.active = fromUI.active;
+            fromDB = fromUI; //<=== why this is dead store?
             
             
         }];

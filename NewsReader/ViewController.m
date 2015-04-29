@@ -179,7 +179,7 @@
     
     UILabel *tempLabel=[[UILabel alloc]initWithFrame:CGRectMake(5,0,300,30)];
     tempLabel.backgroundColor=[UIColor clearColor];
-    tempLabel.textColor = [UIColor darkGrayColor]; //here you can change the text color of header.
+    tempLabel.textColor = [UIColor blackColor]; //here you can change the text color of header.
     FeedURL *feed = [_feeds objectAtIndex:section];
     tempLabel.text = feed.feedTitle;
     [tempView addSubview:tempLabel];
