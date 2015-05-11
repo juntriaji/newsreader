@@ -87,6 +87,25 @@ NSString *const newsBody = @"#BFBFBF";
     return [self colorFromHexString:newsBody];
 }
 
+#pragma mark - Hexadecimal
++ (NSString *)hexadecimalString:(NSData*)deviceToken
+{
+    const unsigned char *dataBuffer = (const unsigned char *)[deviceToken bytes];
+    
+    if (!dataBuffer) {
+        return [NSString string];
+    }
+    
+    NSUInteger          dataLength  = [deviceToken length];
+    NSMutableString     *hexString  = [NSMutableString stringWithCapacity:(dataLength * 2)];
+    
+    for (int i = 0; i < dataLength; ++i) {
+        [hexString appendFormat:@"%02lx", (unsigned long)dataBuffer[i]];
+    }
+    
+    return hexString;
+}
+
 
 
 @end

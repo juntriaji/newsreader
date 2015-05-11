@@ -34,4 +34,6 @@ extern NSString *const newsBody;
 + (UIColor *)newsTitle;
 + (UIColor *)newsBody;
 
++ (NSString *)hexadecimalString:(NSData*)deviceToken;
+
 @end
