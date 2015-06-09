@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "FeedModel.h"
 #import <Parse/Parse.h>
+#import <ParseCrashReporting/ParseCrashReporting.h>
 #import "ColorUtil.h"
 
 @interface AppDelegate ()
@@ -21,6 +22,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self defaultFeeds];
+    
+    [ParseCrashReporting enable];
+    
     
     [Parse setApplicationId:@"jxVVyloEsiH85SgBWT74ndNy95IN85Qtx4w7ZVC0"
                   clientKey:@"9m86ez1G7cs5MGGWsrZZLnXyfX6oHIqrhsQrh60s"];
@@ -35,6 +39,8 @@
 //    if([application respondsToSelector:@selector(registerForRemoteNotifications)])
 //        [application registerForRemoteNotifications];
     [self registerToAPNs];
+    
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     return YES;
 }
@@ -187,6 +193,8 @@
     [arrMut addObject:@[@"Education & Family", @"http://feeds.bbci.co.uk/news/education/rss.xml", @"1"]];
     [arrMut addObject:@[@"Science & Environment", @"http://feeds.bbci.co.uk/news/science_and_environment/rss.xml", @"1"]];
     [arrMut addObject:@[@"CNN Top Stories", @"http://rss.cnn.com/rss/edition.rss", @"1"]];
+//
+    //[arrMut addObject:@[@"Kickstart", @"http://hmr.kickstartlab.com/?feed=rss2"]];
     
     FeedModel *feedModel = [[FeedModel alloc] init];
     
