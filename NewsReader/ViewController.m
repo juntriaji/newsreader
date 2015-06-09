@@ -36,9 +36,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    _feedModel = [[FeedModel alloc] init];
     
+    if([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
+    {
+        //NSLog(@"here");
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    }
 
+    _feedModel = [[FeedModel alloc] init];
 
     
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parsingComplete:) name:@"ParsingComplete" object:nil];

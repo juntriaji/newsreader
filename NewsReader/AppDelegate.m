@@ -8,7 +8,8 @@
 
 #import "AppDelegate.h"
 #import "FeedModel.h"
-//#import <Parse/Parse.h>
+#import <Parse/Parse.h>
+#import "ColorUtil.h"
 
 @interface AppDelegate ()
 
@@ -21,29 +22,51 @@
     // Override point for customization after application launch.
     [self defaultFeeds];
     
-//    [Parse setApplicationId:@"jxVVyloEsiH85SgBWT74ndNy95IN85Qtx4w7ZVC0"
-//                  clientKey:@"9m86ez1G7cs5MGGWsrZZLnXyfX6oHIqrhsQrh60s"];
-//    
-    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
-                                                    UIUserNotificationTypeBadge |
-                                                    UIUserNotificationTypeSound);
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
-                                                                             categories:nil];
-    [application registerUserNotificationSettings:settings];
-    [application registerForRemoteNotifications];
+    [Parse setApplicationId:@"jxVVyloEsiH85SgBWT74ndNy95IN85Qtx4w7ZVC0"
+                  clientKey:@"9m86ez1G7cs5MGGWsrZZLnXyfX6oHIqrhsQrh60s"];
+////    
+//    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+//                                                    UIUserNotificationTypeBadge |
+//                                                    UIUserNotificationTypeSound);
+//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+//                                                                             categories:nil];
+//    if([application respondsToSelector:@selector(registerUserNotificationSettings:)])
+//        [application registerUserNotificationSettings:settings];
+//    if([application respondsToSelector:@selector(registerForRemoteNotifications)])
+//        [application registerForRemoteNotifications];
+    [self registerToAPNs];
     
     return YES;
 }
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+- (void)registerToAPNs
+{
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0)
+        UIUserNotificationSettings *notifSet = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge| UIUserNotificationTypeSound) categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:notifSet];
+#else
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+#endif
+    
+}
+
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
     // Store the deviceToken in the current installation and save it to Parse.
-//    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-//    [currentInstallation setDeviceTokenFromData:deviceToken];
-//    [currentInstallation saveInBackground];
+    NSLog(@"%@", [ColorUtil hexadecimalString:deviceToken]);
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-//    [PFPush handlePush:userInfo];
+    [PFPush handlePush:userInfo];
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+    NSLog(@"Failed to get token, error: %@", error);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
