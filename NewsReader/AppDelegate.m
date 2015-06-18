@@ -186,15 +186,15 @@
     NSMutableArray *arrMut = [NSMutableArray array];
     
     [arrMut addObject:@[@"Top Stories", @"http://feeds.bbci.co.uk/news/rss.xml", @"1"]];
-    [arrMut addObject:@[@"World", @"http://feeds.bbci.co.uk/news/world/rss.xml", @"1"]];
-    [arrMut addObject:@[@"Business", @"http://feeds.bbci.co.uk/news/business/rss.xml", @"1"]];
-    [arrMut addObject:@[@"Politics", @"http://feeds.bbci.co.uk/news/politics/rss.xml", @"1"]];
-    [arrMut addObject:@[@"Health", @"http://feeds.bbci.co.uk/news/health/rss.xml", @"1"]];
-    [arrMut addObject:@[@"Education & Family", @"http://feeds.bbci.co.uk/news/education/rss.xml", @"1"]];
-    [arrMut addObject:@[@"Science & Environment", @"http://feeds.bbci.co.uk/news/science_and_environment/rss.xml", @"1"]];
-    [arrMut addObject:@[@"CNN Top Stories", @"http://rss.cnn.com/rss/edition.rss", @"1"]];
+//    [arrMut addObject:@[@"World", @"http://feeds.bbci.co.uk/news/world/rss.xml", @"1"]];
+//    [arrMut addObject:@[@"Business", @"http://feeds.bbci.co.uk/news/business/rss.xml", @"1"]];
+//    [arrMut addObject:@[@"Politics", @"http://feeds.bbci.co.uk/news/politics/rss.xml", @"1"]];
+//    [arrMut addObject:@[@"Health", @"http://feeds.bbci.co.uk/news/health/rss.xml", @"1"]];
+//    [arrMut addObject:@[@"Education & Family", @"http://feeds.bbci.co.uk/news/education/rss.xml", @"1"]];
+//    [arrMut addObject:@[@"Science & Environment", @"http://feeds.bbci.co.uk/news/science_and_environment/rss.xml", @"1"]];
+//    [arrMut addObject:@[@"CNN Top Stories", @"http://rss.cnn.com/rss/edition.rss", @"1"]];
 //
-    //[arrMut addObject:@[@"Kickstart", @"http://hmr.kickstartlab.com/?feed=rss2"]];
+    [arrMut addObject:@[@"Kickstart", @"http://hmr.kickstartlab.com/?feed=rss2", @"1"]];
     
     FeedModel *feedModel = [[FeedModel alloc] init];
     

@@ -7,6 +7,7 @@
 //
 
 #import "ItemView.h"
+#import "ColorUtil.h"
 
 @implementation ItemView
 
@@ -28,7 +29,7 @@
 {
     [UIView animateWithDuration:0.3 animations:^{
         self.backgroundColor = [UIColor blackColor];
-        self.backgroundColor = [UIColor darkGrayColor];
+        self.backgroundColor = [UIColor clearColor];//[ColorUtil colorFromHexString:@"#1293c9"];
     }];
 
     [_delegate getURLTarget:_urlTarget];

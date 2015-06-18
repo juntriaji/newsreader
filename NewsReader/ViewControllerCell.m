@@ -39,6 +39,7 @@
         item.hidden = YES;
         [_scrollView addSubview:item];
         
+        
         [self downloadImageWithURL:[NSURL URLWithString:fData.media] completionBlock:^(BOOL succeeded, UIImage *image) {
             item.imgView.image = image;
             [UIView transitionWithView:item
