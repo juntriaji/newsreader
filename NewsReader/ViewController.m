@@ -212,7 +212,9 @@
                     animations:^{
                         _webViewVC.view.hidden = NO;
                     } completion:^(BOOL finished) {
-                        [_webViewVC.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:strURL]]];
+                        //[_webViewVC.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:strURL]]];
+                        
+                        [_webViewVC.webView loadHTMLString:strURL baseURL:[[NSURL alloc] init]];
                     }];
 
 }

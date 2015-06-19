@@ -93,6 +93,12 @@ didStartElement:(NSString *)elementName
         FeedData *fData = (FeedData*)_currentElement;
         fData.media = [[attributeDict valueForKey:@"url"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }
+//    if([elementName isEqualToString:@"content:encoded"])
+//    {
+//        FeedData *fData = (FeedData*)_currentElement;
+//        NSLog(@"%@", attributeDict);
+//        //fData.media = [[attributeDict valueForKey:@"url"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//    }
     // CNN
 }
 
@@ -118,6 +124,13 @@ didStartElement:(NSString *)elementName
         if ([_currentElement respondsToSelector:selectorName]) {
             [_currentElement setValue:_currentElementData forKey:elementName];
         }
+        
+        if([elementName isEqualToString:@"content:encoded"])
+        {
+            FeedData *fData = (FeedData*)_currentElement;
+            fData.contentEncoded =  _currentElementData;
+        }
+        //NSLog(@"%@", elementName);
     }
     
     _currentElementData = nil;

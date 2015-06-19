@@ -31,9 +31,12 @@
 - (void)getRSSFeedData:(NSArray *)datas
 {
     _arrData = [NSArray arrayWithArray:datas];
+    //NSLog(@"%@", _arrData);
     [_arrData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
         FeedData *fData = (FeedData*)obj;
+        //NSLog(@"%@", fData.contentEncoded);
+        
         ItemView *item = (ItemView*)[[[NSBundle mainBundle] loadNibNamed:@"ItemView" owner:self options:nil] firstObject];
         item.frame = CGRectMake(item.frame.size.width * idx, 0, item.frame.size.width, _scrollView.frame.size.height);
         item.hidden = YES;
@@ -51,7 +54,7 @@
         }];
         
         item.labelTitle.text = [fData.title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        item.urlTarget = [fData.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        item.urlTarget = fData.contentEncoded;//[fData.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         item.delegate = self;
         
         _scrollView.contentSize = CGSizeMake(CGRectGetMaxX(item.frame), _scrollView.frame.size.height);
