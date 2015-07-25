@@ -16,8 +16,11 @@
 #import "EditFeed.h"
 #import "ODRefreshControl.h"
 #import "ColorUtil.h"
+#import "HttpRequest.h"
+#import "FeedDBModel.h"
+#import "FeedDB.h"
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate, ViewControllerCellDelegate>
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate, ViewControllerCellDelegate, HttpRequestDelegate>
 
 @property (nonatomic) IBOutlet UIView *viewHeader;
 
@@ -28,6 +31,9 @@
 @property (nonatomic) EditFeed *editFeed;
 @property (nonatomic) FeedModel *feedModel;
 @property (nonatomic) ODRefreshControl *refreshControl;
+@property (nonatomic) HttpRequest *requestFeed;
+@property (nonatomic) FeedDBModel *feedDBModel;
+//@property (nonatomic)
 
 @end
 
@@ -44,7 +50,13 @@
     }
 
     _feedModel = [[FeedModel alloc] init];
-
+    
+    _feedDBModel = [[FeedDBModel alloc] init];
+    
+    _requestFeed = [[HttpRequest alloc] init];
+    _requestFeed.delegate = self;
+    [_requestFeed getRSSFeed:@"http://news.wp.sg/?feed=rss2"];
+    
     
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parsingComplete:) name:@"ParsingComplete" object:nil];
     _myTableView.sectionIndexColor = [UIColor whiteColor];
@@ -99,7 +111,7 @@
 {
     [super viewDidAppear:animated];
     //
-    _feeds = [_feedModel getAllActive];
+    //_feeds = [_feedModel getAllActive];
     _webViewVC.view.frame = _myTableView.frame;
     [_myTableView reloadData];
     
@@ -141,7 +153,22 @@
     }
 }
 
+#pragma mark - HTTP REq DElegate
+- (void)getRSSFeedData:(NSArray *)datas
+{
+    NSLog(@"%@", datas);
+    [_feedDBModel bulkSaveData:datas];
+    
+    [self getCategory];
+    
+}
 
+- (void)getCategory
+{
+    _feeds = [_feedDBModel getCategory];
+    [_myTableView reloadData];
+    //NSLog(@"%@", getCat);
+}
 
 #pragma mark - TableView 
 
@@ -164,9 +191,9 @@
         cell = (ViewControllerCell*)[[[NSBundle mainBundle] loadNibNamed:@"ViewControllerCell" owner:self options:nil] firstObject];
         //cell = [[UITableViewCell alloc] init];
     }
-    FeedURL *feedUrl = [_feeds objectAtIndex:indexPath.section];
+    //FeedURL *feedUrl = [_feeds objectAtIndex:indexPath.section];
     cell.delegate = self;
-    cell.feedURL = feedUrl;
+    cell.myCat = [_feeds objectAtIndex:indexPath.section];
     [cell reloadMyCell];
     
     return cell;
@@ -174,7 +201,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 111.0f;
+    return 170.0f;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -185,8 +212,8 @@
     UILabel *tempLabel=[[UILabel alloc]initWithFrame:CGRectMake(5,0,300,30)];
     tempLabel.backgroundColor=[UIColor clearColor];
     tempLabel.textColor = [UIColor blackColor]; //here you can change the text color of header.
-    FeedURL *feed = [_feeds objectAtIndex:section];
-    tempLabel.text = feed.feedTitle;
+    //FeedURL *feed = [_feeds objectAtIndex:section];
+    tempLabel.text = [_feeds objectAtIndex:section];
     [tempView addSubview:tempLabel];
     
     return tempView;

@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "77BBFF5B1AD8CF9700E867E4"
-               BuildableName = "NewsReader.app"
-               BlueprintName = "NewsReader"
+               BuildableName = "WP News.app"
+               BlueprintName = "WP News"
                ReferencedContainer = "container:NewsReader.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -57,8 +57,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77BBFF5B1AD8CF9700E867E4"
-            BuildableName = "NewsReader.app"
-            BlueprintName = "NewsReader"
+            BuildableName = "WP News.app"
+            BlueprintName = "WP News"
             ReferencedContainer = "container:NewsReader.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -76,8 +76,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77BBFF5B1AD8CF9700E867E4"
-            BuildableName = "NewsReader.app"
-            BlueprintName = "NewsReader"
+            BuildableName = "WP News.app"
+            BlueprintName = "WP News"
             ReferencedContainer = "container:NewsReader.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -94,8 +94,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77BBFF5B1AD8CF9700E867E4"
-            BuildableName = "NewsReader.app"
-            BlueprintName = "NewsReader"
+            BuildableName = "WP News.app"
+            BlueprintName = "WP News"
             ReferencedContainer = "container:NewsReader.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

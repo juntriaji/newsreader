@@ -14,5 +14,6 @@
 @property (nonatomic) NSString *link;
 @property (nonatomic) NSString *media;
 @property (nonatomic) NSString *contentEncoded;
+@property (nonatomic) NSString *category;
 
 @end

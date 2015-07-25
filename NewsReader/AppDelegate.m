@@ -194,7 +194,7 @@
 //    [arrMut addObject:@[@"Science & Environment", @"http://feeds.bbci.co.uk/news/science_and_environment/rss.xml", @"1"]];
 //    [arrMut addObject:@[@"CNN Top Stories", @"http://rss.cnn.com/rss/edition.rss", @"1"]];
 //
-    [arrMut addObject:@[@"Kickstart", @"http://hmr.kickstartlab.com/?feed=rss2", @"1"]];
+    [arrMut addObject:@[@"Kickstart", @"http://news.wp.sg/?feed=rss2", @"1"]];
     
     FeedModel *feedModel = [[FeedModel alloc] init];
     

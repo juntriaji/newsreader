@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>NewsReader copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>NewsReader.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>770AB48A1B6315E600316546</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>77BBFF5B1AD8CF9700E867E4</key>
 		<dict>
 			<key>primary</key>

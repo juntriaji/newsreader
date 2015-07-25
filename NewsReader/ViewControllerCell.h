@@ -21,6 +21,7 @@
 @property (nonatomic) FeedURL *feedURL;
 @property (nonatomic) NSArray *arrData;
 @property (nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic) NSString *myCat;
 
 - (void)reloadMyCell;
 

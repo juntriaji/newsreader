@@ -21,6 +21,9 @@
 		299E81801B008AAB00EA4472 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299E81751B008AAB00EA4472 /* Security.framework */; };
 		299E81811B008AAB00EA4472 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299E81761B008AAB00EA4472 /* StoreKit.framework */; };
 		299E81821B008AAB00EA4472 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 299E81771B008AAB00EA4472 /* SystemConfiguration.framework */; };
+		770AB4C41B63217D00316546 /* FeedDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 770AB4C31B63217D00316546 /* FeedDB.m */; };
+		770AB4C71B63232A00316546 /* FeedDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 770AB4C61B63232A00316546 /* FeedDBModel.m */; };
+		770AB4C91B639AA100316546 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 770AB4C81B639AA100316546 /* bg.png */; };
 		7736C9DF1B26F7870072A375 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7736C9DD1B26F7870072A375 /* Bolts.framework */; };
 		7736C9E01B26F7870072A375 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7736C9DE1B26F7870072A375 /* Parse.framework */; };
 		7736C9E21B26FBEF0072A375 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7736C9E11B26FBEF0072A375 /* ParseCrashReporting.framework */; };
@@ -80,11 +83,17 @@
 		299E81751B008AAB00EA4472 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		299E81761B008AAB00EA4472 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		299E81771B008AAB00EA4472 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		770AB4BE1B6315E600316546 /* NewsReader copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "NewsReader copy-Info.plist"; path = "/Users/juntriaji/Documents/XCODE-WORKSPACE/NewsReader/NewsReader copy-Info.plist"; sourceTree = "<absolute>"; };
+		770AB4C21B63217D00316546 /* FeedDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedDB.h; path = COREDATA/FeedDB.h; sourceTree = "<group>"; };
+		770AB4C31B63217D00316546 /* FeedDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedDB.m; path = COREDATA/FeedDB.m; sourceTree = "<group>"; };
+		770AB4C51B63232A00316546 /* FeedDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedDBModel.h; path = COREDATA/FeedDBModel.h; sourceTree = "<group>"; };
+		770AB4C61B63232A00316546 /* FeedDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedDBModel.m; path = COREDATA/FeedDBModel.m; sourceTree = "<group>"; };
+		770AB4C81B639AA100316546 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = IMAGES/bg.png; sourceTree = "<group>"; };
 		7736C9DD1B26F7870072A375 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "NewsReader/parse-library-1.7.4/Bolts.framework"; sourceTree = "<group>"; };
 		7736C9DE1B26F7870072A375 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "NewsReader/parse-library-1.7.4/Parse.framework"; sourceTree = "<group>"; };
 		7736C9E11B26FBEF0072A375 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = "NewsReader/parse-library-1.7.4/ParseCrashReporting.framework"; sourceTree = "<group>"; };
 		7736C9E51B26FEEA0072A375 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
-		77BBFF5C1AD8CF9700E867E4 /* NewsReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		77BBFF5C1AD8CF9700E867E4 /* NewsReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = NewsReader.app; path = "WP News.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77BBFF601AD8CF9700E867E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77BBFF611AD8CF9700E867E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		77BBFF631AD8CF9700E867E4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -192,6 +201,7 @@
 				77BBFF5E1AD8CF9700E867E4 /* NewsReader */,
 				77BBFF7B1AD8CF9700E867E4 /* NewsReaderTests */,
 				77BBFF5D1AD8CF9700E867E4 /* Products */,
+				770AB4BE1B6315E600316546 /* NewsReader copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -249,6 +259,7 @@
 		77BBFF881AD8D44B00E867E4 /* IMAGES */ = {
 			isa = PBXGroup;
 			children = (
+				770AB4C81B639AA100316546 /* bg.png */,
 				292BC4F11AEE231600FDF8F5 /* logo_desc_700.png */,
 				292BC4EF1AEE19C700FDF8F5 /* logo_180.png */,
 				77CCE3311ADA1974001F086A /* checkbox0.png */,
@@ -268,6 +279,10 @@
 				77CCE30C1AD8F1FF001F086A /* FeedURL.m */,
 				77CCE30E1AD8F25F001F086A /* FeedModel.h */,
 				77CCE30F1AD8F25F001F086A /* FeedModel.m */,
+				770AB4C21B63217D00316546 /* FeedDB.h */,
+				770AB4C31B63217D00316546 /* FeedDB.m */,
+				770AB4C51B63232A00316546 /* FeedDBModel.h */,
+				770AB4C61B63232A00316546 /* FeedDBModel.m */,
 			);
 			name = COREDATA;
 			sourceTree = "<group>";
@@ -315,9 +330,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		77BBFF5B1AD8CF9700E867E4 /* NewsReader */ = {
+		77BBFF5B1AD8CF9700E867E4 /* WP News */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 77BBFF821AD8CF9700E867E4 /* Build configuration list for PBXNativeTarget "NewsReader" */;
+			buildConfigurationList = 77BBFF821AD8CF9700E867E4 /* Build configuration list for PBXNativeTarget "WP News" */;
 			buildPhases = (
 				77BBFF581AD8CF9700E867E4 /* Sources */,
 				77BBFF591AD8CF9700E867E4 /* Frameworks */,
@@ -327,7 +342,7 @@
 			);
 			dependencies = (
 			);
-			name = NewsReader;
+			name = "WP News";
 			productName = NewsReader;
 			productReference = 77BBFF5C1AD8CF9700E867E4 /* NewsReader.app */;
 			productType = "com.apple.product-type.application";
@@ -382,7 +397,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				77BBFF5B1AD8CF9700E867E4 /* NewsReader */,
+				77BBFF5B1AD8CF9700E867E4 /* WP News */,
 				77BBFF771AD8CF9700E867E4 /* NewsReaderTests */,
 			);
 		};
@@ -397,6 +412,7 @@
 				77BBFF8E1AD8D71C00E867E4 /* setting_200.png in Resources */,
 				77BBFF8D1AD8D71C00E867E4 /* refresh_200.png in Resources */,
 				77BBFF731AD8CF9700E867E4 /* LaunchScreen.xib in Resources */,
+				770AB4C91B639AA100316546 /* bg.png in Resources */,
 				77CCE31F1AD91DC3001F086A /* ViewControllerCell.xib in Resources */,
 				77CCE3301ADA18F2001F086A /* EditFeedCell.xib in Resources */,
 				77BBFF8A1AD8D45E00E867E4 /* news_logo_200.png in Resources */,
@@ -428,10 +444,12 @@
 				77CCE31A1AD91084001F086A /* FeedData.m in Sources */,
 				77CCE32F1ADA18F2001F086A /* EditFeedCell.m in Sources */,
 				77CCE32B1ADA14A9001F086A /* EditFeed.m in Sources */,
+				770AB4C71B63232A00316546 /* FeedDBModel.m in Sources */,
 				77CCE3141AD8FF61001F086A /* HttpRequest.m in Sources */,
 				77CCE33A1ADA207F001F086A /* GraphUtil.m in Sources */,
 				77CCE30D1AD8F1FF001F086A /* FeedURL.m in Sources */,
 				77CCE3101AD8F25F001F086A /* FeedModel.m in Sources */,
+				770AB4C41B63217D00316546 /* FeedDB.m in Sources */,
 				77CCE3391ADA207F001F086A /* ColorUtil.m in Sources */,
 				77BBFF681AD8CF9700E867E4 /* NewsReader.xcdatamodeld in Sources */,
 				77CCE3281AD94A19001F086A /* WebViewController.m in Sources */,
@@ -455,7 +473,7 @@
 /* Begin PBXTargetDependency section */
 		77BBFF7A1AD8CF9700E867E4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 77BBFF5B1AD8CF9700E867E4 /* NewsReader */;
+			target = 77BBFF5B1AD8CF9700E867E4 /* WP News */;
 			targetProxy = 77BBFF791AD8CF9700E867E4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -636,7 +654,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		77BBFF821AD8CF9700E867E4 /* Build configuration list for PBXNativeTarget "NewsReader" */ = {
+		77BBFF821AD8CF9700E867E4 /* Build configuration list for PBXNativeTarget "WP News" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				77BBFF831AD8CF9700E867E4 /* Debug */,

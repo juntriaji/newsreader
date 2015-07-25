@@ -93,6 +93,7 @@ didStartElement:(NSString *)elementName
         FeedData *fData = (FeedData*)_currentElement;
         fData.media = [[attributeDict valueForKey:@"url"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }
+
 //    if([elementName isEqualToString:@"content:encoded"])
 //    {
 //        FeedData *fData = (FeedData*)_currentElement;

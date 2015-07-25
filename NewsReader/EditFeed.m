@@ -18,6 +18,8 @@
 @property (nonatomic) IBOutlet UIButton *buttonOK;
 @property (nonatomic) FeedModel *feedModel;
 @property (nonatomic) NSMutableArray *feedUrl;
+@property (nonatomic) NSArray *sectionTable;
+@property (nonatomic) NSArray *contentTable;
 
 @end
 
@@ -30,6 +32,18 @@
     
     [_buttonOK setBackgroundImage:[GraphUtil imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
     [GraphUtil createButtonShadow:_buttonOK withBgColor:[UIColor redColor] withBorderColor:[UIColor clearColor]];
+    
+    _sectionTable = @[@"Push Notification", @"News"];
+    _contentTable = @[
+                      @[
+                      @[@"Push Notification", @"Push Notification is On"],
+                        @[@"Sound", @"Push Notification Sound is Enabled"],
+                      @[@"Vibrate", @"Vibrate on Push Notifications is Enabled"]],
+                      @[
+                          @[@"Category Preferences",@"Change preferred Categories to be displayed"]]
+                      
+                      ];
+    NSLog(@"%@", _contentTable);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,16 +56,45 @@
     [super viewDidAppear:animated];
     //
     
-    _feedUrl = [NSMutableArray arrayWithArray:[_feedModel getAll]];
+    //_feedUrl = [NSMutableArray arrayWithArray:[_feedModel getAll]];
     
     [_myTableView reloadData];
 
 }
 
-
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return _sectionTable.count;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _feedUrl.count;
+    return [[_contentTable objectAtIndex:section] count];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01f;
+}
+
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *tempView=[[UIView alloc]initWithFrame:CGRectMake(0,0,300,30)];
+    tempView.backgroundColor=[UIColor clearColor];
+    
+    UILabel *tempLabel=[[UILabel alloc]initWithFrame:CGRectMake(5,0,300,30)];
+    tempLabel.backgroundColor=[UIColor clearColor];
+    tempLabel.textColor = [UIColor blackColor]; //here you can change the text color of header.
+    //FeedURL *feed = [_feeds objectAtIndex:section];
+    tempLabel.text = [_sectionTable objectAtIndex:section];
+    [tempView addSubview:tempLabel];
+    
+    return tempView;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -61,11 +104,12 @@
     {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"EditFeedCell" owner:self options:nil] firstObject];
     }
-    FeedURL *feed = [_feedUrl objectAtIndex:indexPath.row];
-    cell.labelTitleFeed.text = [feed.feedTitle stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    cell.labelURLFeed.text = [feed.feedURL stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    cell.buttonActive.selected = [feed.active isEqualToString:@"1"] || feed.active == nil ? YES : NO;
-    
+    //NSLog(@"-- %li", indexPath.section);
+    NSArray *feed = [_contentTable objectAtIndex:indexPath.section];
+    //NSLog(@"%@", feed);
+    cell.labelTitleFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:0];
+    cell.labelURLFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:1];
+    cell.buttonActive.selected = !cell.buttonActive.selected;
     
     return cell;
 }

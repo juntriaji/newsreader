@@ -10,11 +10,14 @@
 #import "ItemView.h"
 #import "FeedData.h"
 #import "HttpRequest.h"
+#import "FeedDBModel.h"
+#import "FeedDB.h"
 
 
 @interface ViewControllerCell() <UIScrollViewDelegate, HttpRequestDelegate, ItemViewDeleagate>
 
 @property (nonatomic) HttpRequest *request;
+@property (nonatomic) FeedDBModel *feedDBModel;
 
 @end
 
@@ -22,9 +25,11 @@
 @implementation ViewControllerCell
 
 - (void)awakeFromNib {
-    _request = [[HttpRequest alloc] init];
-    _request.delegate = self;
+//    _request = [[HttpRequest alloc] init];
+//    _request.delegate = self;
     //NSLog(@"%lu", (unsigned long)_scrollView.subviews.count);
+    
+    _feedDBModel = [[FeedDBModel alloc] init];
 }
 
 
@@ -34,7 +39,7 @@
     //NSLog(@"%@", _arrData);
     [_arrData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        FeedData *fData = (FeedData*)obj;
+        FeedDB *fData = (FeedDB*)obj;
         //NSLog(@"%@", fData.contentEncoded);
         
         ItemView *item = (ItemView*)[[[NSBundle mainBundle] loadNibNamed:@"ItemView" owner:self options:nil] firstObject];
@@ -56,7 +61,7 @@
         item.labelTitle.text = [fData.title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         item.urlTarget = fData.contentEncoded;//[fData.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         item.delegate = self;
-        
+        //NSLog(@"%@", fData.category);
         _scrollView.contentSize = CGSizeMake(CGRectGetMaxX(item.frame), _scrollView.frame.size.height);
         
     }];
@@ -66,7 +71,9 @@
 
 - (void)reloadMyCell
 {
-    [_request getRSSFeed:_feedURL.feedURL];
+    //[_request getRSSFeed:_feedURL.feedURL];
+    NSArray *data = [_feedDBModel getByCat:_myCat];
+    [self getRSSFeedData:data];
 
 }
 

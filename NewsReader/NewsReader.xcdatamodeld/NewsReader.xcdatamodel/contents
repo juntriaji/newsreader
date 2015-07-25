@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14D131" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14E46" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="FeedDB" representedClassName="FeedDB" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contentEncoded" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="media" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="FeedURL" representedClassName="FeedURL" syncable="YES">
         <attribute name="active" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feedTitle" optional="YES" attributeType="String" syncable="YES"/>
@@ -7,5 +14,6 @@
     </entity>
     <elements>
         <element name="FeedURL" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="FeedDB" positionX="-63" positionY="9" width="128" height="118"/>
     </elements>
 </model>
