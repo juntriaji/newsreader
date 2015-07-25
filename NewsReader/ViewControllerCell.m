@@ -59,7 +59,17 @@
         }];
         
         item.labelTitle.text = [fData.title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        item.urlTarget = fData.contentEncoded;//[fData.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        NSMutableString *mutStr = [NSMutableString stringWithString:@""];
+        
+        NSString *css = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource: @"style" ofType: @"css"] usedEncoding:nil error:nil];
+        [mutStr appendString:@"<html><head><style>"];
+        [mutStr appendString:css];
+        [mutStr appendString:@"</style><body>"];
+        [mutStr appendString:fData.contentEncoded];
+        [mutStr appendString:@"</body></html>"];
+        //mutStr insertString:@"<html><head><style>" atIndex:<#(NSUInteger)#>
+        item.urlTarget = mutStr;//fData.contentEncoded;//[fData.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         item.delegate = self;
         //NSLog(@"%@", fData.category);
         _scrollView.contentSize = CGSizeMake(CGRectGetMaxX(item.frame), _scrollView.frame.size.height);

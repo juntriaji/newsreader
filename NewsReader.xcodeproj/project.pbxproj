@@ -24,6 +24,7 @@
 		770AB4C41B63217D00316546 /* FeedDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 770AB4C31B63217D00316546 /* FeedDB.m */; };
 		770AB4C71B63232A00316546 /* FeedDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 770AB4C61B63232A00316546 /* FeedDBModel.m */; };
 		770AB4C91B639AA100316546 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 770AB4C81B639AA100316546 /* bg.png */; };
+		770AB4CB1B63A95A00316546 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 770AB4CA1B63A95A00316546 /* style.css */; };
 		7736C9DF1B26F7870072A375 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7736C9DD1B26F7870072A375 /* Bolts.framework */; };
 		7736C9E01B26F7870072A375 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7736C9DE1B26F7870072A375 /* Parse.framework */; };
 		7736C9E21B26FBEF0072A375 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7736C9E11B26FBEF0072A375 /* ParseCrashReporting.framework */; };
@@ -89,6 +90,7 @@
 		770AB4C51B63232A00316546 /* FeedDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedDBModel.h; path = COREDATA/FeedDBModel.h; sourceTree = "<group>"; };
 		770AB4C61B63232A00316546 /* FeedDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedDBModel.m; path = COREDATA/FeedDBModel.m; sourceTree = "<group>"; };
 		770AB4C81B639AA100316546 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = IMAGES/bg.png; sourceTree = "<group>"; };
+		770AB4CA1B63A95A00316546 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		7736C9DD1B26F7870072A375 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "NewsReader/parse-library-1.7.4/Bolts.framework"; sourceTree = "<group>"; };
 		7736C9DE1B26F7870072A375 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "NewsReader/parse-library-1.7.4/Parse.framework"; sourceTree = "<group>"; };
 		7736C9E11B26FBEF0072A375 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = "NewsReader/parse-library-1.7.4/ParseCrashReporting.framework"; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 		77BBFF5F1AD8CF9700E867E4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				770AB4CA1B63A95A00316546 /* style.css */,
 				77BBFF601AD8CF9700E867E4 /* Info.plist */,
 				77BBFF611AD8CF9700E867E4 /* main.m */,
 			);
@@ -415,6 +418,7 @@
 				770AB4C91B639AA100316546 /* bg.png in Resources */,
 				77CCE31F1AD91DC3001F086A /* ViewControllerCell.xib in Resources */,
 				77CCE3301ADA18F2001F086A /* EditFeedCell.xib in Resources */,
+				770AB4CB1B63A95A00316546 /* style.css in Resources */,
 				77BBFF8A1AD8D45E00E867E4 /* news_logo_200.png in Resources */,
 				77BBFF701AD8CF9700E867E4 /* Images.xcassets in Resources */,
 				292BC4F01AEE19C700FDF8F5 /* logo_180.png in Resources */,
