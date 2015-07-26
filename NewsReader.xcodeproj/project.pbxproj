@@ -29,6 +29,7 @@
 		7736C9E01B26F7870072A375 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7736C9DE1B26F7870072A375 /* Parse.framework */; };
 		7736C9E21B26FBEF0072A375 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7736C9E11B26FBEF0072A375 /* ParseCrashReporting.framework */; };
 		7736C9E61B26FEEA0072A375 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7736C9E51B26FEEA0072A375 /* libstdc++.6.0.9.dylib */; };
+		77A71B101B64E00700F29BCF /* FeedCategoryPref.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A71B0F1B64E00700F29BCF /* FeedCategoryPref.m */; };
 		77BBFF621AD8CF9700E867E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77BBFF611AD8CF9700E867E4 /* main.m */; };
 		77BBFF651AD8CF9700E867E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77BBFF641AD8CF9700E867E4 /* AppDelegate.m */; };
 		77BBFF681AD8CF9700E867E4 /* NewsReader.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77BBFF661AD8CF9700E867E4 /* NewsReader.xcdatamodeld */; };
@@ -95,7 +96,9 @@
 		7736C9DE1B26F7870072A375 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "NewsReader/parse-library-1.7.4/Parse.framework"; sourceTree = "<group>"; };
 		7736C9E11B26FBEF0072A375 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = "NewsReader/parse-library-1.7.4/ParseCrashReporting.framework"; sourceTree = "<group>"; };
 		7736C9E51B26FEEA0072A375 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
-		77BBFF5C1AD8CF9700E867E4 /* NewsReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = NewsReader.app; path = "WP News.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		77A71B0E1B64E00700F29BCF /* FeedCategoryPref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedCategoryPref.h; path = COREDATA/FeedCategoryPref.h; sourceTree = "<group>"; };
+		77A71B0F1B64E00700F29BCF /* FeedCategoryPref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedCategoryPref.m; path = COREDATA/FeedCategoryPref.m; sourceTree = "<group>"; };
+		77BBFF5C1AD8CF9700E867E4 /* WP News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WP News.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77BBFF601AD8CF9700E867E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77BBFF611AD8CF9700E867E4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		77BBFF631AD8CF9700E867E4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -210,7 +213,7 @@
 		77BBFF5D1AD8CF9700E867E4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				77BBFF5C1AD8CF9700E867E4 /* NewsReader.app */,
+				77BBFF5C1AD8CF9700E867E4 /* WP News.app */,
 				77BBFF781AD8CF9700E867E4 /* NewsReaderTests.xctest */,
 			);
 			name = Products;
@@ -286,6 +289,8 @@
 				770AB4C31B63217D00316546 /* FeedDB.m */,
 				770AB4C51B63232A00316546 /* FeedDBModel.h */,
 				770AB4C61B63232A00316546 /* FeedDBModel.m */,
+				77A71B0E1B64E00700F29BCF /* FeedCategoryPref.h */,
+				77A71B0F1B64E00700F29BCF /* FeedCategoryPref.m */,
 			);
 			name = COREDATA;
 			sourceTree = "<group>";
@@ -347,7 +352,7 @@
 			);
 			name = "WP News";
 			productName = NewsReader;
-			productReference = 77BBFF5C1AD8CF9700E867E4 /* NewsReader.app */;
+			productReference = 77BBFF5C1AD8CF9700E867E4 /* WP News.app */;
 			productType = "com.apple.product-type.application";
 		};
 		77BBFF771AD8CF9700E867E4 /* NewsReaderTests */ = {
@@ -446,6 +451,7 @@
 				290A2F091ADB79AC0050E2C5 /* ODRefreshControl.m in Sources */,
 				77CCE31E1AD91DC3001F086A /* ViewControllerCell.m in Sources */,
 				77CCE31A1AD91084001F086A /* FeedData.m in Sources */,
+				77A71B101B64E00700F29BCF /* FeedCategoryPref.m in Sources */,
 				77CCE32F1ADA18F2001F086A /* EditFeedCell.m in Sources */,
 				77CCE32B1ADA14A9001F086A /* EditFeed.m in Sources */,
 				770AB4C71B63232A00316546 /* FeedDBModel.m in Sources */,
@@ -585,6 +591,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/NewsReader/parse-library-1.7.4",
@@ -593,6 +600,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -601,6 +609,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/NewsReader/parse-library-1.7.4",
@@ -609,6 +618,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

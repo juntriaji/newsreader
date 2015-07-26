@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14E46" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="FeedCategoryPref" representedClassName="FeedCategoryPref" syncable="YES">
+        <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="enabled" optional="YES" attributeType="Boolean" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="FeedDB" representedClassName="FeedDB" syncable="YES">
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contentEncoded" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,7 +17,8 @@
         <attribute name="feedURL" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="FeedURL" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="FeedDB" positionX="-63" positionY="9" width="128" height="118"/>
+        <element name="FeedURL" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="FeedCategoryPref" positionX="-63" positionY="36" width="128" height="75"/>
     </elements>
 </model>

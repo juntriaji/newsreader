@@ -19,4 +19,9 @@
 - (NSArray*)getCategory;
 - (NSArray*)getByCat:(NSString*)catName;
 
+#pragma mark - Category Preference
+//- (void)saveCategoryPref;
+- (NSArray*)getAllCatPref;
+- (void)updateCatPref:(NSString*)catName value:(NSNumber*)value;
+
 @end

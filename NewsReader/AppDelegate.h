@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "FeedDBModel.h"
+#import "HttpRequest.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, HttpRequestDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -17,6 +19,10 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+@property (nonatomic) FeedDBModel *feedDBModel;
+@property (nonatomic) HttpRequest *requestFeed;
+
+- (void)refreshFeed;
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 

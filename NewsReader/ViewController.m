@@ -16,11 +16,11 @@
 #import "EditFeed.h"
 #import "ODRefreshControl.h"
 #import "ColorUtil.h"
-#import "HttpRequest.h"
 #import "FeedDBModel.h"
 #import "FeedDB.h"
+#import "AppDelegate.h"
 
-@interface ViewController () <UITableViewDataSource, UITableViewDelegate, ViewControllerCellDelegate, HttpRequestDelegate>
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate, ViewControllerCellDelegate>
 
 @property (nonatomic) IBOutlet UIView *viewHeader;
 
@@ -29,10 +29,9 @@
 @property (nonatomic) UIStoryboard *storyBoard;
 @property (nonatomic) WebViewController *webViewVC;
 @property (nonatomic) EditFeed *editFeed;
-@property (nonatomic) FeedModel *feedModel;
 @property (nonatomic) ODRefreshControl *refreshControl;
-@property (nonatomic) HttpRequest *requestFeed;
 @property (nonatomic) FeedDBModel *feedDBModel;
+@property (nonatomic) AppDelegate *appDelegate;
 //@property (nonatomic)
 
 @end
@@ -48,17 +47,11 @@
         //NSLog(@"here");
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
-
-    _feedModel = [[FeedModel alloc] init];
     
+    _appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
+
     _feedDBModel = [[FeedDBModel alloc] init];
     
-    _requestFeed = [[HttpRequest alloc] init];
-    _requestFeed.delegate = self;
-    [_requestFeed getRSSFeed:@"http://news.wp.sg/?feed=rss2"];
-    
-    
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(parsingComplete:) name:@"ParsingComplete" object:nil];
     _myTableView.sectionIndexColor = [UIColor whiteColor];
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
@@ -81,6 +74,8 @@
     
     [_viewHeader setBackgroundColor:[ColorUtil colorFromHexString:@"#1293c9"]];
     
+    
+    
 }
 
 
@@ -92,6 +87,8 @@
 
 - (void)refreshAction:(id)sender
 {
+    [_appDelegate requestFeed];
+    [self getCategory];
     [_myTableView reloadData];
     
     [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(timerStop:) userInfo:nil repeats:NO];
@@ -112,6 +109,7 @@
     [super viewDidAppear:animated];
     //
     //_feeds = [_feedModel getAllActive];
+    [self getCategory];
     _webViewVC.view.frame = _myTableView.frame;
     [_myTableView reloadData];
     
@@ -154,14 +152,14 @@
 }
 
 #pragma mark - HTTP REq DElegate
-- (void)getRSSFeedData:(NSArray *)datas
-{
-    NSLog(@"%@", datas);
-    [_feedDBModel bulkSaveData:datas];
-    
-    [self getCategory];
-    
-}
+//- (void)getRSSFeedData:(NSArray *)datas
+//{
+//    NSLog(@"%@", datas);
+//    [_feedDBModel bulkSaveData:datas];
+//    
+//    [self getCategory];
+//    
+//}
 
 - (void)getCategory
 {

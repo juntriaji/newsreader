@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "FeedDB.h"
 #import "FeedData.h"
+#import "FeedCategoryPref.h"
 
 @implementation FeedDBModel
 
@@ -79,8 +80,9 @@
         FeedDB *fDB = (FeedDB*)obj;
         [dict setValue:fDB.category forKey:fDB.category];
     }];
-    
-    return [dict allKeys];
+    NSArray *cat = [dict allKeys];
+    [self saveCategoryPref:cat];
+    return cat;
 }
 
 
@@ -112,6 +114,119 @@
     NSArray *recordSet = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
     return recordSet;
     
+}
+
+#pragma mark -  Category Pref
+
+- (NSArray*)getAllCatPref
+{
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"FeedCategoryPref"
+                                              inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSArray *recordSet = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    return recordSet;
+    
+}
+
+- (void)saveCategoryPref:(NSArray*)catExisting
+{
+    //NSLog(@"iki %@", catExisting);
+    [catExisting enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if(![self isExistsCategoryName:obj])
+        {
+            [self insertNewCategory:obj];
+        }
+    }];
+    
+    [self deleteIfCatNoLongerExists:catExisting];
+}
+
+- (void)insertNewCategory:(NSString*)catName
+{
+    NSError *error = nil;
+    FeedCategoryPref *feedCAtPref = [NSEntityDescription
+                                     insertNewObjectForEntityForName:@"FeedCategoryPref" inManagedObjectContext:_managedObjectContext];
+    feedCAtPref.categoryName = catName;
+    feedCAtPref.enabled = @1;
+    
+    if(![_managedObjectContext save:&error]){
+        NSLog(@"Whoops error ndeng...%@", error.localizedDescription);
+    }
+        
+}
+
+- (void)updateCatPref:(NSString*)catName value:(NSNumber*)value
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryName == %@", catName];
+    
+    NSError *error = nil;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"FeedCategoryPref"
+                                              inManagedObjectContext:_managedObjectContext];
+    fetchRequest.entity = entity;
+    fetchRequest.predicate = predicate;
+    NSArray *recordSet = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    [recordSet enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        FeedCategoryPref *feedCatPref = (FeedCategoryPref*)obj;
+        feedCatPref.enabled = value;
+    }];
+    
+    if(![_managedObjectContext save:&error]){
+        NSLog(@"Whoops error ndeng...%@", error.localizedDescription);
+    }
+    
+}
+
+- (void)deleteIfCatNoLongerExists:(NSArray*)catNames
+{
+
+    //NSArray *currenCat = [self getAllCatPref];
+    NSError *error = nil;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"FeedCategoryPref"
+                                              inManagedObjectContext:_managedObjectContext];
+    fetchRequest.entity = entity;
+    //fetchRequest.predicate = predicate;
+    NSArray *recordSet = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+
+    [recordSet enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        FeedCategoryPref *pref = (FeedCategoryPref*)obj;
+        if([catNames indexOfObject:pref.categoryName] == NSNotFound)
+        {
+            [_managedObjectContext deleteObject:obj];
+        }
+    }];
+    
+    
+    if(![_managedObjectContext save:&error]){
+        NSLog(@"Whoops error ndeng...%@", error.localizedDescription);
+    }
+    
+}
+
+
+- (BOOL)isExistsCategoryName:(NSString*)catName
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryName == %@", catName];
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"FeedCategoryPref"
+                                              inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *recordSet = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    //NSLog(@"== %@", recordSet);
+    if(recordSet.count > 0)
+        return YES;
+    
+    return NO;
 }
 
 

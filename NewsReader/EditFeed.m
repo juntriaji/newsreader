@@ -7,7 +7,8 @@
 //
 
 #import "EditFeed.h"
-#import "FeedModel.h"
+#import "FeedDBModel.h"
+#import "FeedCategoryPref.h"
 #import "FeedURL.h"
 #import "EditFeedCell.h"
 #import "GraphUtil.h"
@@ -16,10 +17,10 @@
 
 @property (nonatomic) IBOutlet UITableView *myTableView;
 @property (nonatomic) IBOutlet UIButton *buttonOK;
-@property (nonatomic) FeedModel *feedModel;
+@property (nonatomic) FeedDBModel *feedDBModel;
 @property (nonatomic) NSMutableArray *feedUrl;
 @property (nonatomic) NSArray *sectionTable;
-@property (nonatomic) NSArray *contentTable;
+@property (nonatomic) NSMutableArray *contentTable;
 
 @end
 
@@ -28,13 +29,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _feedModel = [[FeedModel alloc] init];
-    
+    _feedDBModel = [[FeedDBModel alloc] init];
+
     [_buttonOK setBackgroundImage:[GraphUtil imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
     [GraphUtil createButtonShadow:_buttonOK withBgColor:[UIColor redColor] withBorderColor:[UIColor clearColor]];
     
     _sectionTable = @[@"Push Notification", @"News"];
-    _contentTable = @[
+    NSArray *tmpArr = @[
                       @[
                       @[@"Push Notification", @"Push Notification is On"],
                         @[@"Sound", @"Push Notification Sound is Enabled"],
@@ -43,7 +44,8 @@
                           @[@"Category Preferences",@"Change preferred Categories to be displayed"]]
                       
                       ];
-    NSLog(@"%@", _contentTable);
+    
+    _contentTable = [NSMutableArray arrayWithArray:tmpArr];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,6 +57,18 @@
 {
     [super viewDidAppear:animated];
     //
+    //[_feedDBModel saveCategoryPref];
+    NSArray *catPref = [_feedDBModel getAllCatPref];
+    NSMutableArray *tmpArr = [NSMutableArray array];
+    [catPref enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        FeedCategoryPref *pref = (FeedCategoryPref*)obj;
+//        NSLog(@"%@", pref.categoryName);
+        NSArray *val = @[pref.categoryName, [pref.enabled stringValue]];
+        [tmpArr addObject:val];
+    }];
+    [_contentTable replaceObjectAtIndex:1 withObject:tmpArr];
+    
+    NSLog(@"%@", _contentTable);
     
     //_feedUrl = [NSMutableArray arrayWithArray:[_feedModel getAll]];
     
@@ -99,6 +113,7 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     EditFeedCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EditCell"];
     if(cell == nil)
     {
@@ -107,9 +122,29 @@
     //NSLog(@"-- %li", indexPath.section);
     NSArray *feed = [_contentTable objectAtIndex:indexPath.section];
     //NSLog(@"%@", feed);
-    cell.labelTitleFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:0];
-    cell.labelURLFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:1];
-    cell.buttonActive.selected = !cell.buttonActive.selected;
+    if(indexPath.section == 0)
+    {
+        cell.labelTitleFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:0];
+        cell.labelURLFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:1];
+        cell.buttonActive.selected = !cell.buttonActive.selected;
+    }
+    else{
+        //NSLog(@"%@ == > %li", [feed objectAtIndex:indexPath.row], (long)indexPath.row);
+        //FeedCategoryPref *pref = [feed objectAtIndex:indexPath.row];
+        //NSLog(@"%@", pref.categoryName);
+        cell.labelTitleFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:0];
+        NSString *enabled =[[feed objectAtIndex:indexPath.row] objectAtIndex:1];
+        if([enabled isEqualToString:@"1"])
+
+        {
+            cell.labelURLFeed.text = @"Enabled";
+        }
+        else
+        {
+            cell.labelURLFeed.text = @"Disabled";
+        }
+        cell.buttonActive.selected = [enabled isEqualToString:@"1"] ? YES : NO;
+    }
     
     return cell;
 }
@@ -136,7 +171,7 @@
 
 - (IBAction)buttonAction:(UIButton*)sender
 {
-    [_feedModel saveAll:[NSArray arrayWithArray:_feedUrl]];
+    //[_feedModel saveAll:[NSArray arrayWithArray:_feedUrl]];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

@@ -21,23 +21,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
     [self defaultFeeds];
     
     [ParseCrashReporting enable];
     
     
-    [Parse setApplicationId:@"jxVVyloEsiH85SgBWT74ndNy95IN85Qtx4w7ZVC0"
-                  clientKey:@"9m86ez1G7cs5MGGWsrZZLnXyfX6oHIqrhsQrh60s"];
-////    
-//    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
-//                                                    UIUserNotificationTypeBadge |
-//                                                    UIUserNotificationTypeSound);
-//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
-//                                                                             categories:nil];
-//    if([application respondsToSelector:@selector(registerUserNotificationSettings:)])
-//        [application registerUserNotificationSettings:settings];
-//    if([application respondsToSelector:@selector(registerForRemoteNotifications)])
-//        [application registerForRemoteNotifications];
+    [Parse setApplicationId:@"Ejn1u9YxslHL3fqndhEPV7BPcpMvY3o9BAoMPJhJ"
+                  clientKey:@"oMw04chHGQvyPumdhF2D9IZV5c8twHSGZzVCNvbz"];
     [self registerToAPNs];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
@@ -183,22 +174,27 @@
 
 - (void)defaultFeeds
 {
-    NSMutableArray *arrMut = [NSMutableArray array];
+    _requestFeed = [[HttpRequest alloc] init];
+    _requestFeed.delegate = self;
+    [self refreshFeed];
     
-//    [arrMut addObject:@[@"Top Stories", @"http://feeds.bbci.co.uk/news/rss.xml", @"1"]];
-//    [arrMut addObject:@[@"World", @"http://feeds.bbci.co.uk/news/world/rss.xml", @"1"]];
-//    [arrMut addObject:@[@"Business", @"http://feeds.bbci.co.uk/news/business/rss.xml", @"1"]];
-//    [arrMut addObject:@[@"Politics", @"http://feeds.bbci.co.uk/news/politics/rss.xml", @"1"]];
-//    [arrMut addObject:@[@"Health", @"http://feeds.bbci.co.uk/news/health/rss.xml", @"1"]];
-//    [arrMut addObject:@[@"Education & Family", @"http://feeds.bbci.co.uk/news/education/rss.xml", @"1"]];
-//    [arrMut addObject:@[@"Science & Environment", @"http://feeds.bbci.co.uk/news/science_and_environment/rss.xml", @"1"]];
-//    [arrMut addObject:@[@"CNN Top Stories", @"http://rss.cnn.com/rss/edition.rss", @"1"]];
-//
-    [arrMut addObject:@[@"Kickstart", @"http://news.wp.sg/?feed=rss2", @"1"]];
-    
-    FeedModel *feedModel = [[FeedModel alloc] init];
-    
-    [feedModel bulkSaveData:arrMut];
+    _feedDBModel = [[FeedDBModel alloc] init];
+    [_feedDBModel getAll];
+
 }
+
+- (void)refreshFeed
+{
+    [_requestFeed getRSSFeed:@"http://news.wp.sg/?feed=rss2"];
+    
+}
+#pragma mark - HTTP REq DElegate
+- (void)getRSSFeedData:(NSArray *)datas
+{
+    NSLog(@"%s -- %@", __PRETTY_FUNCTION__, datas);
+    [_feedDBModel bulkSaveData:datas];
+}
+
+
 
 @end
