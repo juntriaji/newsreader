@@ -131,6 +131,29 @@
     
 }
 
+- (NSArray*)getAllCatPrefActive
+{
+    NSError *error;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"enabled == 1"];
+
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"FeedCategoryPref"
+                                              inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *recordSet = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSMutableArray *arrMut = [NSMutableArray array];
+    [recordSet enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        FeedCategoryPref *fDB = (FeedCategoryPref*)obj;
+        [arrMut addObject:fDB.categoryName];
+        
+    }];
+
+    return arrMut;
+    
+}
+
 - (void)saveCategoryPref:(NSArray*)catExisting
 {
     //NSLog(@"iki %@", catExisting);
@@ -160,6 +183,7 @@
 
 - (void)updateCatPref:(NSString*)catName value:(NSNumber*)value
 {
+    NSLog(@"%@ %@", value, catName);
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryName == %@", catName];
     
     NSError *error = nil;
@@ -170,10 +194,12 @@
     fetchRequest.entity = entity;
     fetchRequest.predicate = predicate;
     NSArray *recordSet = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
+    NSLog(@"count %lu", (unsigned long)recordSet.count);
     [recordSet enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         FeedCategoryPref *feedCatPref = (FeedCategoryPref*)obj;
         feedCatPref.enabled = value;
+        feedCatPref.categoryName = feedCatPref.categoryName;
+        NSLog(@"%@", feedCatPref.categoryName);
     }];
     
     if(![_managedObjectContext save:&error]){

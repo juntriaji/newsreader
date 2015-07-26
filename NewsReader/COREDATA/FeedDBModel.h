@@ -22,6 +22,7 @@
 #pragma mark - Category Preference
 //- (void)saveCategoryPref;
 - (NSArray*)getAllCatPref;
+- (NSArray*)getAllCatPrefActive;
 - (void)updateCatPref:(NSString*)catName value:(NSNumber*)value;
 
 @end

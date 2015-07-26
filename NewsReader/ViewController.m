@@ -163,7 +163,7 @@
 
 - (void)getCategory
 {
-    _feeds = [_feedDBModel getCategory];
+    _feeds = [_feedDBModel getAllCatPrefActive];
     [_myTableView reloadData];
     //NSLog(@"%@", getCat);
 }

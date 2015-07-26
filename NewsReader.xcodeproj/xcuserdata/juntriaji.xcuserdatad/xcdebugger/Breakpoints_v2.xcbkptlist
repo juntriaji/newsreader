@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NewsReader/COREDATA/FeedDBModel.m"
-            timestampString = "459601142.769438"
+            timestampString = "459606240.216587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "-isExistsCategoryName:"
             landmarkType = "5">
          </BreakpointContent>

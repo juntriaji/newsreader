@@ -62,16 +62,11 @@
     NSMutableArray *tmpArr = [NSMutableArray array];
     [catPref enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         FeedCategoryPref *pref = (FeedCategoryPref*)obj;
-//        NSLog(@"%@", pref.categoryName);
         NSArray *val = @[pref.categoryName, [pref.enabled stringValue]];
         [tmpArr addObject:val];
     }];
     [_contentTable replaceObjectAtIndex:1 withObject:tmpArr];
-    
     NSLog(@"%@", _contentTable);
-    
-    //_feedUrl = [NSMutableArray arrayWithArray:[_feedModel getAll]];
-    
     [_myTableView reloadData];
 
 }
@@ -157,6 +152,24 @@
     
     EditFeedCell *cell = (EditFeedCell*)[tableView cellForRowAtIndexPath:indexPath];
     cell.buttonActive.selected = ! cell.buttonActive.selected;
+    
+    if(indexPath.section == 1)
+    {
+        if(cell.buttonActive.selected)
+        {
+            [_feedDBModel updateCatPref:cell.labelTitleFeed.text value:@1];
+        }
+        else
+        {
+            [_feedDBModel updateCatPref:cell.labelTitleFeed.text value:@0];
+        }
+        NSLog(@"%@", [_feedDBModel getAllCatPref]);
+        NSArray *arr = [_feedDBModel getAllCatPref];
+        [arr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            FeedCategoryPref *pref = (FeedCategoryPref*)obj;
+            NSLog(@"%@ ==> %@", pref.categoryName, pref.enabled);
+        }];
+    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 
