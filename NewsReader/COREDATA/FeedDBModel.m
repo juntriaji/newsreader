@@ -183,7 +183,6 @@
 
 - (void)updateCatPref:(NSString*)catName value:(NSNumber*)value
 {
-    NSLog(@"%@ %@", value, catName);
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryName == %@", catName];
     
     NSError *error = nil;
@@ -194,12 +193,10 @@
     fetchRequest.entity = entity;
     fetchRequest.predicate = predicate;
     NSArray *recordSet = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    NSLog(@"count %lu", (unsigned long)recordSet.count);
     [recordSet enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         FeedCategoryPref *feedCatPref = (FeedCategoryPref*)obj;
         feedCatPref.enabled = value;
         feedCatPref.categoryName = feedCatPref.categoryName;
-        NSLog(@"%@", feedCatPref.categoryName);
     }];
     
     if(![_managedObjectContext save:&error]){

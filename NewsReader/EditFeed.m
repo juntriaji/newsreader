@@ -66,7 +66,6 @@
         [tmpArr addObject:val];
     }];
     [_contentTable replaceObjectAtIndex:1 withObject:tmpArr];
-    NSLog(@"%@", _contentTable);
     [_myTableView reloadData];
 
 }
@@ -157,18 +156,14 @@
     {
         if(cell.buttonActive.selected)
         {
+            cell.labelURLFeed.text = @"Enabled";
             [_feedDBModel updateCatPref:cell.labelTitleFeed.text value:@1];
         }
         else
         {
+            cell.labelURLFeed.text = @"Disabled";
             [_feedDBModel updateCatPref:cell.labelTitleFeed.text value:@0];
         }
-        NSLog(@"%@", [_feedDBModel getAllCatPref]);
-        NSArray *arr = [_feedDBModel getAllCatPref];
-        [arr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            FeedCategoryPref *pref = (FeedCategoryPref*)obj;
-            NSLog(@"%@ ==> %@", pref.categoryName, pref.enabled);
-        }];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
