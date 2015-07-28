@@ -53,9 +53,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     //
     //[_feedDBModel saveCategoryPref];
     NSArray *catPref = [_feedDBModel getAllCatPref];

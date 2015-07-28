@@ -191,7 +191,6 @@
 #pragma mark - HTTP REq DElegate
 - (void)getRSSFeedData:(NSArray *)datas
 {
-    NSLog(@"%s -- %@", __PRETTY_FUNCTION__, datas);
     [_feedDBModel bulkSaveData:datas];
 }
 

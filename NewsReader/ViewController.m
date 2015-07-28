@@ -89,9 +89,8 @@
 {
     [_appDelegate requestFeed];
     [self getCategory];
-    [_myTableView reloadData];
     
-    [NSTimer scheduledTimerWithTimeInterval:1.5f target:self selector:@selector(timerStop:) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerStop:) userInfo:nil repeats:NO];
 }
 
 - (void)timerStop:(id)sender
@@ -102,6 +101,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [_feedDBModel getCategory];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -161,11 +167,17 @@
 //    
 //}
 
+
 - (void)getCategory
 {
+    [_feedDBModel getCategory];
     _feeds = [_feedDBModel getAllCatPrefActive];
+    if(_feeds.count == 0)
+    {
+        NSLog(@"triger timer");
+        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(getCategory) userInfo:nil repeats:NO];
+    }
     [_myTableView reloadData];
-    //NSLog(@"%@", getCat);
 }
 
 #pragma mark - TableView 
