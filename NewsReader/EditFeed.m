@@ -22,6 +22,9 @@
 @property (nonatomic) NSArray *sectionTable;
 @property (nonatomic) NSMutableArray *contentTable;
 
+@property (nonatomic) NSMutableDictionary *dictPlist;
+@property (nonatomic) NSString *pathPlist;
+
 @end
 
 @implementation EditFeed
@@ -31,8 +34,10 @@
     // Do any additional setup after loading the view.
     _feedDBModel = [[FeedDBModel alloc] init];
 
-    [_buttonOK setBackgroundImage:[GraphUtil imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
-    [GraphUtil createButtonShadow:_buttonOK withBgColor:[UIColor redColor] withBorderColor:[UIColor clearColor]];
+    //[_buttonOK setBackgroundImage:[GraphUtil imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
+    //[GraphUtil createButtonShadow:_buttonOK withBgColor:[UIColor redColor] withBorderColor:[UIColor clearColor]];
+    [GraphUtil createBordersWithCorderRadius:_buttonOK color:[UIColor whiteColor] radius:5];
+    
     
     _sectionTable = @[@"Push Notification", @"News"];
     NSArray *tmpArr = @[
@@ -58,6 +63,10 @@
     [super viewWillAppear:animated];
     //
     //[_feedDBModel saveCategoryPref];
+    _pathPlist = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
+    _dictPlist = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+
     NSArray *catPref = [_feedDBModel getAllCatPref];
     NSMutableArray *tmpArr = [NSMutableArray array];
     [catPref enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -67,7 +76,7 @@
     }];
     [_contentTable replaceObjectAtIndex:1 withObject:tmpArr];
     [_myTableView reloadData];
-
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, _dictPlist);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -120,7 +129,25 @@
     {
         cell.labelTitleFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:0];
         cell.labelURLFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:1];
+        
+        
         cell.buttonActive.selected = !cell.buttonActive.selected;
+        
+        if(indexPath.row == 0)
+        {
+            cell.buttonActive.selected = [[_dictPlist valueForKey:@"PushNotification"] isEqual:@1] ? YES : NO;
+
+        }
+        else if (indexPath.row == 1)
+        {
+            cell.buttonActive.selected = [[_dictPlist valueForKey:@"Sound"] isEqual:@1] ? YES : NO;
+
+        }
+        else
+        {
+            cell.buttonActive.selected = [[_dictPlist valueForKey:@"Vibrate"] isEqual:@1] ? YES : NO;
+            
+        }
     }
     else{
         //NSLog(@"%@ == > %li", [feed objectAtIndex:indexPath.row], (long)indexPath.row);
@@ -164,6 +191,28 @@
             cell.labelURLFeed.text = @"Disabled";
             [_feedDBModel updateCatPref:cell.labelTitleFeed.text value:@0];
         }
+    }
+    else
+    {
+        if(indexPath.row == 0)
+        {
+            NSLog(@"selected %i", cell.buttonActive.selected);
+            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"PushNotification"];
+            
+        }
+        else if (indexPath.row == 1)
+        {
+            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"Sound"];
+            
+        }
+        else
+        {
+            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"Vibrate"];
+
+            
+        }
+        [_dictPlist writeToFile:_pathPlist atomically:YES];
+        NSLog(@"%@", _dictPlist);
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];

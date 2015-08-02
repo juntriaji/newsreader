@@ -10,7 +10,7 @@
 
 @protocol ItemViewDeleagate <NSObject>
 
-- (void)getURLTarget:(NSString*)strURL;
+- (void)getURLTarget:(NSString*)strURL additionData:(NSArray*)arrData;
 
 @end
 
@@ -20,5 +20,6 @@
 @property (nonatomic) IBOutlet UIImageView *imgView;
 @property (nonatomic) IBOutlet UILabel *labelTitle;
 @property (nonatomic) NSString *urlTarget;
+@property (nonatomic) NSString *link;
 
 @end

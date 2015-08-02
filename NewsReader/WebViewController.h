@@ -11,5 +11,6 @@
 @interface WebViewController : UIViewController
 
 @property (nonatomic) IBOutlet UIWebView *webView;
+@property (nonatomic) NSArray *arrData;
 
 @end

@@ -59,6 +59,12 @@
         }];
         
         item.labelTitle.text = [fData.title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"EEE, dd MM yyyy HH:mm:ss ZZZ"];//Wed, 29 Jul 2015 17:37:12 +0000
+        NSDate *date = [df dateFromString:fData.pubDate];
+        [df setDateFormat:@"dd MMM yyyy, hh:mm a"];
+        NSString *finaly = [df stringFromDate:date];
+        //NSLog(@"== %@ => %@ => %@", item.labelTitle.text, finaly, fData.pubDate);
         
         NSMutableString *mutStr = [NSMutableString stringWithString:@""];
         
@@ -66,12 +72,12 @@
         [mutStr appendString:@"<html><head><style>"];
         [mutStr appendString:css];
         [mutStr appendString:@"</style><body>"];
+        [mutStr appendString:[NSString stringWithFormat:@"<h3>%@</h3><strong>Posted on %@</strong><br>", item.labelTitle.text, finaly]];
         [mutStr appendString:fData.contentEncoded];
         [mutStr appendString:@"</body></html>"];
-        //mutStr insertString:@"<html><head><style>" atIndex:<#(NSUInteger)#>
-        item.urlTarget = mutStr;//fData.contentEncoded;//[fData.link stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        item.urlTarget = mutStr;
+        item.link = fData.share_url == nil ? fData.link : fData.share_url;
         item.delegate = self;
-        //NSLog(@"%@", fData.category);
         _scrollView.contentSize = CGSizeMake(CGRectGetMaxX(item.frame), _scrollView.frame.size.height);
         
     }];
@@ -110,9 +116,9 @@
     // Configure the view for the selected state
 }
 
-- (void)getURLTarget:(NSString *)strURL
+- (void)getURLTarget:(NSString *)strURL additionData:(NSArray *)arrData
 {
-    [_delegate getRSSFeedURL:strURL];
+    [_delegate getRSSFeedURL:strURL additionData:arrData];
 }
 
 @end

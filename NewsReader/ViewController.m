@@ -74,8 +74,12 @@
     
     [_viewHeader setBackgroundColor:[ColorUtil colorFromHexString:@"#1293c9"]];
     
+    [self addChildViewController:_webViewVC];
     
-    
+    _tellFriend = [[TellAFriendController alloc] init];
+    _tellFriend.view.backgroundColor = [UIColor whiteColor];
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+        _popOver = [[UIPopoverController alloc] initWithContentViewController:_tellFriend];
 }
 
 
@@ -116,7 +120,7 @@
     //
     //_feeds = [_feedModel getAllActive];
     [self getCategory];
-    _webViewVC.view.frame = _myTableView.frame;
+    _webViewVC.view.frame = self.view.frame;
     [_myTableView reloadData];
     
 }
@@ -239,12 +243,12 @@
     return 0.01f;
 }
 
-- (void)getRSSFeedURL:(NSString *)strURL
+- (void)getRSSFeedURL:(NSString *)strURL additionData:(NSArray*)arrData
 {
     [self.view bringSubviewToFront:_webViewVC.view];
-    
+    _webViewVC.arrData = arrData;
     [UIView transitionWithView:self.view
-                      duration:0.5f
+                      duration:0.3f
                        options:UIViewAnimationOptionTransitionCrossDissolve
                     animations:^{
                         _webViewVC.view.hidden = NO;

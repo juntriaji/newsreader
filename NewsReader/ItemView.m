@@ -31,8 +31,9 @@
         self.backgroundColor = [UIColor blackColor];
         self.backgroundColor = [UIColor clearColor];//[ColorUtil colorFromHexString:@"#1293c9"];
     }];
+    NSArray *data = @[_labelTitle.text, _link];
 
-    [_delegate getURLTarget:_urlTarget];
+    [_delegate getURLTarget:_urlTarget additionData:data];
 }
 
 @end

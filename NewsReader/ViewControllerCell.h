@@ -11,7 +11,7 @@
 
 @protocol ViewControllerCellDelegate <NSObject>
 
-- (void)getRSSFeedURL:(NSString*)strURL;
+- (void)getRSSFeedURL:(NSString*)strURL additionData:(NSArray *)arrData;
 
 @end
 

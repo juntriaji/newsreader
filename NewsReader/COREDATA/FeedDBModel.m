@@ -42,6 +42,9 @@
         feedDB.media = [fData.media stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         feedDB.contentEncoded = [fData.contentEncoded stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         feedDB.category = [fData.category stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        feedDB.pubDate = [fData.pubDate stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        feedDB.share_url = [fData.share_url stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        //NSLog(@"%@ == %@", feedDB.title, feedDB.pubDate);
     }];
     
     if(![_managedObjectContext save:&error]){
@@ -123,7 +126,9 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"FeedCategoryPref"
                                               inManagedObjectContext:_managedObjectContext];
-    [fetchRequest setEntity:entity];
+    NSSortDescriptor *decriptors = [NSSortDescriptor sortDescriptorWithKey:@"categoryName" ascending:YES];
+    fetchRequest.entity = entity;
+    fetchRequest.sortDescriptors = @[decriptors];
     
     NSArray *recordSet = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
     return recordSet;
@@ -138,8 +143,10 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"FeedCategoryPref"
                                               inManagedObjectContext:_managedObjectContext];
+    NSSortDescriptor *decriptors = [NSSortDescriptor sortDescriptorWithKey:@"categoryName" ascending:YES];
     [fetchRequest setEntity:entity];
     [fetchRequest setPredicate:predicate];
+    fetchRequest.sortDescriptors = @[decriptors];
     
     NSArray *recordSet = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
     NSMutableArray *arrMut = [NSMutableArray array];

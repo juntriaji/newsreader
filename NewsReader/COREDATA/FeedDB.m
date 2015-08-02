@@ -16,5 +16,7 @@
 @dynamic media;
 @dynamic contentEncoded;
 @dynamic category;
+@dynamic pubDate;
+@dynamic share_url;
 
 @end

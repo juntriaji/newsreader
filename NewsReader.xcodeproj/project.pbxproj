@@ -57,6 +57,14 @@
 		77CCE3341ADA1974001F086A /* checkbox1.png in Resources */ = {isa = PBXBuildFile; fileRef = 77CCE3321ADA1974001F086A /* checkbox1.png */; };
 		77CCE3391ADA207F001F086A /* ColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CCE3361ADA207F001F086A /* ColorUtil.m */; };
 		77CCE33A1ADA207F001F086A /* GraphUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CCE3381ADA207F001F086A /* GraphUtil.m */; };
+		77D79F2D1B697C8500854E53 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77D79F2C1B697C8500854E53 /* Settings.plist */; };
+		77D79F2F1B6C9DC300854E53 /* ic_arrow_back_white_48dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D79F2E1B6C9DC300854E53 /* ic_arrow_back_white_48dp.png */; };
+		77D79F311B6C9FE000854E53 /* ic_share_white_48dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D79F301B6C9FE000854E53 /* ic_share_white_48dp.png */; };
+		77E57CEE1B6CCE1800A87CD7 /* TellAFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E57CEC1B6CCE1800A87CD7 /* TellAFriendController.m */; };
+		77E57CEF1B6CCE1800A87CD7 /* TellAFriendController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77E57CED1B6CCE1800A87CD7 /* TellAFriendController.xib */; };
+		77E57CF31B6CCEBC00A87CD7 /* email_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E57CF01B6CCEBC00A87CD7 /* email_48.png */; };
+		77E57CF41B6CCEBC00A87CD7 /* facebook_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E57CF11B6CCEBC00A87CD7 /* facebook_48.png */; };
+		77E57CF51B6CCEBC00A87CD7 /* twitter_48.png in Resources */ = {isa = PBXBuildFile; fileRef = 77E57CF21B6CCEBC00A87CD7 /* twitter_48.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +150,15 @@
 		77CCE3361ADA207F001F086A /* ColorUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorUtil.m; path = UTIL/ColorUtil.m; sourceTree = "<group>"; };
 		77CCE3371ADA207F001F086A /* GraphUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GraphUtil.h; path = UTIL/GraphUtil.h; sourceTree = "<group>"; };
 		77CCE3381ADA207F001F086A /* GraphUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GraphUtil.m; path = UTIL/GraphUtil.m; sourceTree = "<group>"; };
+		77D79F2C1B697C8500854E53 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		77D79F2E1B6C9DC300854E53 /* ic_arrow_back_white_48dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_arrow_back_white_48dp.png; path = IMAGES/ic_arrow_back_white_48dp.png; sourceTree = "<group>"; };
+		77D79F301B6C9FE000854E53 /* ic_share_white_48dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_share_white_48dp.png; path = IMAGES/ic_share_white_48dp.png; sourceTree = "<group>"; };
+		77E57CEB1B6CCE1800A87CD7 /* TellAFriendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TellAFriendController.h; sourceTree = "<group>"; };
+		77E57CEC1B6CCE1800A87CD7 /* TellAFriendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TellAFriendController.m; sourceTree = "<group>"; };
+		77E57CED1B6CCE1800A87CD7 /* TellAFriendController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TellAFriendController.xib; sourceTree = "<group>"; };
+		77E57CF01B6CCEBC00A87CD7 /* email_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = email_48.png; path = IMAGES/email_48.png; sourceTree = "<group>"; };
+		77E57CF11B6CCEBC00A87CD7 /* facebook_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = facebook_48.png; path = IMAGES/facebook_48.png; sourceTree = "<group>"; };
+		77E57CF21B6CCEBC00A87CD7 /* twitter_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = twitter_48.png; path = IMAGES/twitter_48.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +258,7 @@
 				770AB4CA1B63A95A00316546 /* style.css */,
 				77BBFF601AD8CF9700E867E4 /* Info.plist */,
 				77BBFF611AD8CF9700E867E4 /* main.m */,
+				77D79F2C1B697C8500854E53 /* Settings.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -265,6 +283,11 @@
 		77BBFF881AD8D44B00E867E4 /* IMAGES */ = {
 			isa = PBXGroup;
 			children = (
+				77E57CF01B6CCEBC00A87CD7 /* email_48.png */,
+				77E57CF11B6CCEBC00A87CD7 /* facebook_48.png */,
+				77E57CF21B6CCEBC00A87CD7 /* twitter_48.png */,
+				77D79F301B6C9FE000854E53 /* ic_share_white_48dp.png */,
+				77D79F2E1B6C9DC300854E53 /* ic_arrow_back_white_48dp.png */,
 				770AB4C81B639AA100316546 /* bg.png */,
 				292BC4F11AEE231600FDF8F5 /* logo_desc_700.png */,
 				292BC4EF1AEE19C700FDF8F5 /* logo_180.png */,
@@ -315,6 +338,9 @@
 		77CCE3201AD91E0D001F086A /* CONTROLLER */ = {
 			isa = PBXGroup;
 			children = (
+				77E57CEB1B6CCE1800A87CD7 /* TellAFriendController.h */,
+				77E57CEC1B6CCE1800A87CD7 /* TellAFriendController.m */,
+				77E57CED1B6CCE1800A87CD7 /* TellAFriendController.xib */,
 				77BBFF6C1AD8CF9700E867E4 /* Main.storyboard */,
 				77BBFF691AD8CF9700E867E4 /* ViewController.h */,
 				77BBFF6A1AD8CF9700E867E4 /* ViewController.m */,
@@ -417,19 +443,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				77BBFF6E1AD8CF9700E867E4 /* Main.storyboard in Resources */,
+				77E57CF51B6CCEBC00A87CD7 /* twitter_48.png in Resources */,
 				77BBFF8E1AD8D71C00E867E4 /* setting_200.png in Resources */,
+				77D79F2F1B6C9DC300854E53 /* ic_arrow_back_white_48dp.png in Resources */,
+				77D79F311B6C9FE000854E53 /* ic_share_white_48dp.png in Resources */,
 				77BBFF8D1AD8D71C00E867E4 /* refresh_200.png in Resources */,
 				77BBFF731AD8CF9700E867E4 /* LaunchScreen.xib in Resources */,
 				770AB4C91B639AA100316546 /* bg.png in Resources */,
+				77E57CF41B6CCEBC00A87CD7 /* facebook_48.png in Resources */,
 				77CCE31F1AD91DC3001F086A /* ViewControllerCell.xib in Resources */,
 				77CCE3301ADA18F2001F086A /* EditFeedCell.xib in Resources */,
 				770AB4CB1B63A95A00316546 /* style.css in Resources */,
 				77BBFF8A1AD8D45E00E867E4 /* news_logo_200.png in Resources */,
+				77D79F2D1B697C8500854E53 /* Settings.plist in Resources */,
 				77BBFF701AD8CF9700E867E4 /* Images.xcassets in Resources */,
 				292BC4F01AEE19C700FDF8F5 /* logo_180.png in Resources */,
+				77E57CF31B6CCEBC00A87CD7 /* email_48.png in Resources */,
 				292BC4F21AEE231600FDF8F5 /* logo_desc_700.png in Resources */,
 				77CCE3341ADA1974001F086A /* checkbox1.png in Resources */,
 				77CCE3251AD91E60001F086A /* ItemView.xib in Resources */,
+				77E57CEF1B6CCE1800A87CD7 /* TellAFriendController.xib in Resources */,
 				77CCE3331ADA1974001F086A /* checkbox0.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +489,7 @@
 				77CCE32B1ADA14A9001F086A /* EditFeed.m in Sources */,
 				770AB4C71B63232A00316546 /* FeedDBModel.m in Sources */,
 				77CCE3141AD8FF61001F086A /* HttpRequest.m in Sources */,
+				77E57CEE1B6CCE1800A87CD7 /* TellAFriendController.m in Sources */,
 				77CCE33A1ADA207F001F086A /* GraphUtil.m in Sources */,
 				77CCE30D1AD8F1FF001F086A /* FeedURL.m in Sources */,
 				77CCE3101AD8F25F001F086A /* FeedModel.m in Sources */,
@@ -637,7 +671,7 @@
 				INFOPLIST_FILE = NewsReaderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsReader.app/NewsReader";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WP News.app/WP News";
 			};
 			name = Debug;
 		};
@@ -652,7 +686,7 @@
 				INFOPLIST_FILE = NewsReaderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NewsReader.app/NewsReader";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WP News.app/WP News";
 			};
 			name = Release;
 		};

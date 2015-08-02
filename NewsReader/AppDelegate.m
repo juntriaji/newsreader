@@ -29,6 +29,7 @@
     
     [Parse setApplicationId:@"Ejn1u9YxslHL3fqndhEPV7BPcpMvY3o9BAoMPJhJ"
                   clientKey:@"oMw04chHGQvyPumdhF2D9IZV5c8twHSGZzVCNvbz"];
+    
     [self registerToAPNs];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
@@ -38,12 +39,15 @@
 
 - (void)registerToAPNs
 {
+    //NSLog(@"register");
 #if (__IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0)
         UIUserNotificationSettings *notifSet = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge| UIUserNotificationTypeSound) categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:notifSet];
+    
 #else
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
 #endif
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
     
 }
 
@@ -51,7 +55,8 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     // Store the deviceToken in the current installation and save it to Parse.
-    NSLog(@"%@", [ColorUtil hexadecimalString:deviceToken]);
+    //NSLog(@"token %@", deviceToken);
+    
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation saveInBackground];
@@ -59,6 +64,7 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
+    //NSLog(@"got push %@", userInfo);
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error

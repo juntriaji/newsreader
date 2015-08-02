@@ -15,5 +15,7 @@
 @property (nonatomic) NSString *media;
 @property (nonatomic) NSString *contentEncoded;
 @property (nonatomic) NSString *category;
+@property (nonatomic) NSString *pubDate;
+@property (nonatomic) NSString *share_url;
 
 @end

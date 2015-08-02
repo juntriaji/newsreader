@@ -7,10 +7,17 @@
 //
 
 #import "WebViewController.h"
+#import "ColorUtil.h"
+#import "TellAFriendController.h"
+#import "ViewController.h"
 
 @interface WebViewController () <UIWebViewDelegate>
 
 @property (nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic) IBOutlet UIView *viewHeader;
+@property (nonatomic) TellAFriendController *tellFriend;
+@property (nonatomic) UIPopoverController *popOver;
+@property (nonatomic) IBOutlet UIButton *buttonShare;
 
 @end
 
@@ -27,8 +34,15 @@
                                              selector:@selector(didRotate:)
                                                  name:@"UIDeviceOrientationDidChangeNotification"
                                                object:nil];
-
+    [_viewHeader setBackgroundColor:[ColorUtil colorFromHexString:@"#1293c9"]];
+    
+    _tellFriend = [[TellAFriendController alloc] init];
+    _tellFriend.view.hidden = YES;
+    [self.view addSubview:_tellFriend.view];
+    [self addChildViewController:_tellFriend];
+    
 }
+
 
 - (void)didRotate:(id)sender
 {
@@ -53,13 +67,55 @@
 
 - (IBAction)buttonAcction:(UIButton*)sender
 {
+    switch (sender.tag) {
+        case 1:
+        {
+            if (_tellFriend.view.hidden)
+            {
+                [UIView transitionWithView:self.view
+                                  duration:0.3f
+                                   options:UIViewAnimationOptionTransitionCrossDissolve
+                                animations:^{
+                                    self.view.hidden = YES;
+                                } completion:^(BOOL finished) {
+                                    [_webView loadHTMLString:@"" baseURL:[[NSURL alloc] init]];
+                                }];
+            }
+            {
+                _tellFriend.view.hidden = YES;
+            }
+            
+            break;
+        }
+        case 2:
+        {
+            if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+            {
+                ViewController *vwc = (ViewController*)self.parentViewController;
+                vwc.tellFriend.stringTitle = [_arrData objectAtIndex:0];
+                vwc.tellFriend.stringUrl = [_arrData objectAtIndex:1];
 
-    [UIView transitionWithView:self.view
-                      duration:0.5f
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{
-                        self.view.hidden = YES;
-                    } completion:nil];
+                [vwc.popOver presentPopoverFromRect:_buttonShare.frame inView:vwc.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:NO];
+            }
+            else
+            {
+                _tellFriend.stringTitle = [_arrData objectAtIndex:0];
+                _tellFriend.stringUrl = [_arrData objectAtIndex:1];
+                _tellFriend.view.frame = _webView.frame;
+                [UIView transitionWithView:self.view
+                                  duration:0.3f
+                                   options:UIViewAnimationOptionTransitionCrossDissolve
+                                animations:^{
+                                    _tellFriend.view.hidden = NO;
+                                    [self.view bringSubviewToFront:_tellFriend.view];
+                                } completion:nil];
+            }
+            
+            break;
+        }
+        default:
+            break;
+    }
 
 }
 

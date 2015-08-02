@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TellAFriendController.h"
 
 
 @interface ViewController : UIViewController
 
 
+@property (nonatomic) UIPopoverController *popOver;
+@property (nonatomic) TellAFriendController *tellFriend;
 
 @end
 
