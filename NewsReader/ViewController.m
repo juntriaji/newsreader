@@ -80,6 +80,10 @@
     _tellFriend.view.backgroundColor = [UIColor whiteColor];
     if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
         _popOver = [[UIPopoverController alloc] initWithContentViewController:_tellFriend];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPostID:) name:@"PostID" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openTheBrowser) name:@"PostIDInactive" object:nil];
+
 }
 
 
@@ -110,8 +114,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [_feedDBModel getCategory];
+    [_appDelegate requestFeed];
+    //[_feedDBModel getCategory];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -123,6 +127,66 @@
     _webViewVC.view.frame = self.view.frame;
     [_myTableView reloadData];
     
+    
+}
+
+
+- (void)getPostID:(NSNotification*)sender
+{
+    // @"Workers' Party News"
+    NSDictionary *dict = [sender userInfo];
+    NSString *title = [[dict valueForKey:@"aps"] valueForKey:@"alert"];
+    if([dict valueForKey:@"post_id"] != nil)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Workers' Party News" message:title delegate:self cancelButtonTitle:@"Read" otherButtonTitles:@"Skip", nil];
+        alert.tag = 1;
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Workers' Party News" message:title delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        alert.tag = 2;
+        
+    }
+    
+}
+
+- (void)openTheBrowser
+{
+    FeedDB *db = [_feedDBModel getByPostID:[_appDelegate.remoteNotifDict valueForKey:@"post_id"]];
+    
+    if(db == nil)
+    {
+        [_appDelegate refreshFeed];
+        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerGetPostID) userInfo:nil repeats:NO];
+    }
+    else
+    {
+        [self showwebView:db];
+    }
+
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (alertView.tag) {
+        case 1:
+        {
+            [self openTheBrowser];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+
+- (void)timerGetPostID
+{
+    FeedDB *db = [_feedDBModel getByPostID:[_appDelegate.remoteNotifDict valueForKey:@"post_id"]];
+    if(db != nil)
+        [self showwebView:db];
+    else
+        [[[UIAlertView alloc] initWithTitle:@"Workers' Party News" message:@"Error, can not fetch the content." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 }
 
 - (IBAction)buttonAction:(UIButton*)sender
@@ -178,7 +242,7 @@
     _feeds = [_feedDBModel getAllCatPrefActive];
     if(_feeds.count == 0)
     {
-        NSLog(@"triger timer");
+        //NSLog(@"triger timer");
         [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(getCategory) userInfo:nil repeats:NO];
     }
     [_myTableView reloadData];
@@ -243,8 +307,43 @@
     return 0.01f;
 }
 
+- (void)showwebView:(FeedDB*)fData
+{
+    
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"dd MMM yyyy, hh:mm a"];
+    NSString *finaly = [df stringFromDate:fData.pubDate];
+    //NSLog(@"== %@ => %@ => %@", item.labelTitle.text, finaly, fData.pubDate);
+    
+    NSMutableString *mutStr = [NSMutableString stringWithString:@""];
+    
+    NSString *css = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource: @"style" ofType: @"css"] usedEncoding:nil error:nil];
+    [mutStr appendString:@"<html><head><style>"];
+    [mutStr appendString:css];
+    [mutStr appendString:@"</style><body>"];
+    [mutStr appendString:[NSString stringWithFormat:@"<h3>%@</h3><strong>Posted on %@</strong><br>", fData.title, finaly]];
+    [mutStr appendString:fData.contentEncoded];
+    [mutStr appendString:@"</body></html>"];
+    
+    NSString *link = fData.share_url == nil ? fData.link : fData.share_url;
+    
+    [self.view bringSubviewToFront:_webViewVC.view];
+    _webViewVC.arrData = @[fData.title, link];
+    [UIView transitionWithView:self.view
+                      duration:0.3f
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        _webViewVC.view.hidden = NO;
+                    } completion:^(BOOL finished) {
+                        [_webViewVC.webView loadHTMLString:mutStr baseURL:[[NSURL alloc] init]];
+                    }];
+
+    
+}
+
 - (void)getRSSFeedURL:(NSString *)strURL additionData:(NSArray*)arrData
 {
+    //NSLog(@"%@ %@", arrData, strURL);
     [self.view bringSubviewToFront:_webViewVC.view];
     _webViewVC.arrData = arrData;
     [UIView transitionWithView:self.view

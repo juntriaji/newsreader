@@ -39,18 +39,20 @@
     [GraphUtil createBordersWithCorderRadius:_buttonOK color:[UIColor whiteColor] radius:5];
     
     
-    _sectionTable = @[@"Push Notification", @"News"];
-    NSArray *tmpArr = @[
-                      @[
-                      @[@"Push Notification", @"Push Notification is On"],
-                        @[@"Sound", @"Push Notification Sound is Enabled"],
-                      @[@"Vibrate", @"Vibrate on Push Notifications is Enabled"]],
-                      @[
-                          @[@"Category Preferences",@"Change preferred Categories to be displayed"]]
-                      
-                      ];
+//    _sectionTable = @[@"Push Notification", @"News"];
+    _sectionTable = @[@"News"];
+//    NSArray *tmpArr = @[
+//                      @[
+//                      @[@"Push Notification", @"Push Notification is On"],
+//                        @[@"Sound", @"Push Notification Sound is Enabled"],
+//                      @[@"Vibrate", @"Vibrate on Push Notifications is Enabled"]],
+//                      @[
+//                          @[@"Category Preferences",@"Change preferred Categories to be displayed"]]
+//                      
+//                      ];
     
-    _contentTable = [NSMutableArray arrayWithArray:tmpArr];
+//    _contentTable = [NSMutableArray arrayWithArray:tmpArr];
+    _contentTable = [NSMutableArray array];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,15 +70,20 @@
     _dictPlist = [NSMutableDictionary dictionaryWithContentsOfFile:path];
 
     NSArray *catPref = [_feedDBModel getAllCatPref];
+    //NSLog(@"%@", catPref);
+    [_contentTable removeAllObjects];
     NSMutableArray *tmpArr = [NSMutableArray array];
     [catPref enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         FeedCategoryPref *pref = (FeedCategoryPref*)obj;
         NSArray *val = @[pref.categoryName, [pref.enabled stringValue]];
         [tmpArr addObject:val];
     }];
-    [_contentTable replaceObjectAtIndex:1 withObject:tmpArr];
+    //[_contentTable replaceObjectAtIndex:0 withObject:tmpArr];
+    [_contentTable addObject:tmpArr];
+    //NSLog(@"%@", _contentTable);
+    //[_contentTable removeLastObject];
     [_myTableView reloadData];
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, _dictPlist);
+    //NSLog(@"%s %@", __PRETTY_FUNCTION__, _dictPlist);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -127,29 +134,29 @@
     //NSLog(@"%@", feed);
     if(indexPath.section == 0)
     {
-        cell.labelTitleFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:0];
-        cell.labelURLFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:1];
-        
-        
-        cell.buttonActive.selected = !cell.buttonActive.selected;
-        
-        if(indexPath.row == 0)
-        {
-            cell.buttonActive.selected = [[_dictPlist valueForKey:@"PushNotification"] isEqual:@1] ? YES : NO;
-
-        }
-        else if (indexPath.row == 1)
-        {
-            cell.buttonActive.selected = [[_dictPlist valueForKey:@"Sound"] isEqual:@1] ? YES : NO;
-
-        }
-        else
-        {
-            cell.buttonActive.selected = [[_dictPlist valueForKey:@"Vibrate"] isEqual:@1] ? YES : NO;
-            
-        }
-    }
-    else{
+//        cell.labelTitleFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:0];
+//        cell.labelURLFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:1];
+//        
+//        
+//        cell.buttonActive.selected = !cell.buttonActive.selected;
+//        
+//        if(indexPath.row == 0)
+//        {
+//            cell.buttonActive.selected = [[_dictPlist valueForKey:@"PushNotification"] isEqual:@1] ? YES : NO;
+//
+//        }
+//        else if (indexPath.row == 1)
+//        {
+//            cell.buttonActive.selected = [[_dictPlist valueForKey:@"Sound"] isEqual:@1] ? YES : NO;
+//
+//        }
+//        else
+//        {
+//            cell.buttonActive.selected = [[_dictPlist valueForKey:@"Vibrate"] isEqual:@1] ? YES : NO;
+//            
+//        }
+//    }
+//    else{
         //NSLog(@"%@ == > %li", [feed objectAtIndex:indexPath.row], (long)indexPath.row);
         //FeedCategoryPref *pref = [feed objectAtIndex:indexPath.row];
         //NSLog(@"%@", pref.categoryName);
@@ -179,8 +186,9 @@
     EditFeedCell *cell = (EditFeedCell*)[tableView cellForRowAtIndexPath:indexPath];
     cell.buttonActive.selected = ! cell.buttonActive.selected;
     
-    if(indexPath.section == 1)
+    if(indexPath.section == 0)
     {
+        
         if(cell.buttonActive.selected)
         {
             cell.labelURLFeed.text = @"Enabled";
@@ -192,28 +200,28 @@
             [_feedDBModel updateCatPref:cell.labelTitleFeed.text value:@0];
         }
     }
-    else
-    {
-        if(indexPath.row == 0)
-        {
-            NSLog(@"selected %i", cell.buttonActive.selected);
-            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"PushNotification"];
-            
-        }
-        else if (indexPath.row == 1)
-        {
-            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"Sound"];
-            
-        }
-        else
-        {
-            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"Vibrate"];
-
-            
-        }
-        [_dictPlist writeToFile:_pathPlist atomically:YES];
-        NSLog(@"%@", _dictPlist);
-    }
+//    else
+//    {
+//        if(indexPath.row == 0)
+//        {
+//            NSLog(@"selected %i", cell.buttonActive.selected);
+//            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"PushNotification"];
+//            
+//        }
+//        else if (indexPath.row == 1)
+//        {
+//            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"Sound"];
+//            
+//        }
+//        else
+//        {
+//            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"Vibrate"];
+//
+//            
+//        }
+//        [_dictPlist writeToFile:_pathPlist atomically:YES];
+//        NSLog(@"%@", _dictPlist);
+//    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 

@@ -60,10 +60,8 @@
         
         item.labelTitle.text = [fData.title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        [df setDateFormat:@"EEE, dd MM yyyy HH:mm:ss ZZZ"];//Wed, 29 Jul 2015 17:37:12 +0000
-        NSDate *date = [df dateFromString:fData.pubDate];
         [df setDateFormat:@"dd MMM yyyy, hh:mm a"];
-        NSString *finaly = [df stringFromDate:date];
+        NSString *finaly = [df stringFromDate:fData.pubDate];
         //NSLog(@"== %@ => %@ => %@", item.labelTitle.text, finaly, fData.pubDate);
         
         NSMutableString *mutStr = [NSMutableString stringWithString:@""];

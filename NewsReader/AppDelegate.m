@@ -34,6 +34,8 @@
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
+    //_postID = @"170";
+    
     return YES;
 }
 
@@ -63,8 +65,37 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
-    //NSLog(@"got push %@", userInfo);
+    //[PFPush handlePush:userInfo];
+    _remoteNotifDict = userInfo;
+    
+    if(application.applicationState == UIApplicationStateInactive) {
+        
+        //NSLog(@"Inactive");
+        
+        //Show the view with the content of the push
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"PostIDInactive" object:self userInfo:userInfo] ;
+
+        
+        
+    } else if (application.applicationState == UIApplicationStateBackground) {
+        
+        //NSLog(@"Background");
+        
+        //Refresh the local model
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"PostIDInactive" object:self userInfo:userInfo] ;
+
+        
+        
+    } else {
+        
+        //NSLog(@"Active");
+        
+        //Show an in-app banner
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"PostID" object:self userInfo:userInfo] ;
+
+        
+        
+    }
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
@@ -88,6 +119,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    //[NSNotificationCenter defaultCenter] postNotificationName:@"PostID" object:self userInfo:userInfo]
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -185,7 +217,7 @@
     [self refreshFeed];
     
     _feedDBModel = [[FeedDBModel alloc] init];
-    [_feedDBModel getAll];
+//    [_feedDBModel getAll];
 
 }
 

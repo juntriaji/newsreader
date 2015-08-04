@@ -31,6 +31,9 @@
 {
     [self emptyDBFeed];
     NSError *error = nil;
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"EEE, dd MM yyyy HH:mm:ss ZZZ"];//Wed, 29 Jul 2015 17:37:12 +0000
+
     [feeds enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         // save
         FeedData *fData = (FeedData*)obj;
@@ -42,7 +45,9 @@
         feedDB.media = [fData.media stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         feedDB.contentEncoded = [fData.contentEncoded stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         feedDB.category = [fData.category stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        feedDB.pubDate = [fData.pubDate stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSDate *date = [df dateFromString:[fData.pubDate stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+
+        feedDB.pubDate = date;
         feedDB.share_url = [fData.share_url stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         //NSLog(@"%@ == %@", feedDB.title, feedDB.pubDate);
     }];
@@ -106,10 +111,13 @@
 - (NSArray*)getByCat:(NSString*)catName
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", catName];
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc]
+                              initWithKey:@"pubDate" ascending:NO];
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:_entity
                                               inManagedObjectContext:_managedObjectContext];
+    fetchRequest.sortDescriptors = @[sort];
     [fetchRequest setEntity:entity];
     [fetchRequest setPredicate:predicate];
     
@@ -258,5 +266,30 @@
     return NO;
 }
 
+- (FeedDB*)getByPostID:(NSString*)postID
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"link CONTAINS[cd] %@", postID];
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:_entity
+                                              inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *recordSet = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    FeedDB __block *retFeed;
+    int length = 255;
+    [recordSet enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        FeedDB *feedDB = (FeedDB*)obj;
+        if(feedDB.link.length < length)
+        {
+            retFeed = feedDB;
+        }
+    }];
+    
+    return retFeed;
+    
+}
 
 @end

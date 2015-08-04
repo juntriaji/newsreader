@@ -22,6 +22,8 @@
 @property (nonatomic) FeedDBModel *feedDBModel;
 @property (nonatomic) HttpRequest *requestFeed;
 
+@property (nonatomic) NSDictionary *remoteNotifDict;
+
 - (void)refreshFeed;
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

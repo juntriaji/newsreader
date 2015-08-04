@@ -14,10 +14,20 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>WP News copy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>770AB48A1B6315E600316546</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>770F322E1B717EA800182816</key>
 		<dict>
 			<key>primary</key>
 			<true/>

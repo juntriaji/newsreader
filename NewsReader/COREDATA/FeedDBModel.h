@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "FeedDB.h"
 
 @interface FeedDBModel : NSObject
 
@@ -24,5 +25,5 @@
 - (NSArray*)getAllCatPref;
 - (NSArray*)getAllCatPrefActive;
 - (void)updateCatPref:(NSString*)catName value:(NSNumber*)value;
-
+- (FeedDB*)getByPostID:(NSString*)postID;
 @end
