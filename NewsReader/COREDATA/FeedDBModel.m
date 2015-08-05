@@ -279,12 +279,13 @@
     NSArray *recordSet = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     FeedDB __block *retFeed;
-    int length = 255;
+    int __block length = 255;
     [recordSet enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         FeedDB *feedDB = (FeedDB*)obj;
         if(feedDB.link.length < length)
         {
             retFeed = feedDB;
+            length = (int) feedDB.link.length;
         }
     }];
     
