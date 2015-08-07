@@ -83,8 +83,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPostID:) name:@"PostID" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openTheBrowser) name:@"PostIDInactive" object:nil];
+    
 
 }
+
 
 
 - (void)didRotate:(NSNotification *)notification
@@ -114,25 +116,40 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [_appDelegate requestFeed];
-    //[_feedDBModel getCategory];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     //
-    //_feeds = [_feedModel getAllActive];
     [self getCategory];
     _webViewVC.view.frame = self.view.frame;
     [_myTableView reloadData];
     
+    // test
+    //[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(timerTest:) userInfo:nil repeats:NO];
+
+}
+
+
+- (void)timerTest:(NSTimer*)sender
+{
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //test
+    _appDelegate.remoteNotifDict = @{@"aps": @{@"alert" : @"this is the Title"}, @"post_id" : @"170"};
+    
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"PostIDInactive" object:self userInfo:_appDelegate.remoteNotifDict] ;
+    
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"PostID" object:self userInfo:_appDelegate.remoteNotifDict] ;
     
 }
 
 
 - (void)getPostID:(NSNotification*)sender
 {
+
     // @"Workers' Party News"
     NSDictionary *dict = [sender userInfo];
     NSString *title = [[dict valueForKey:@"aps"] valueForKey:@"alert"];
@@ -140,11 +157,13 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Workers' Party News" message:title delegate:self cancelButtonTitle:@"Read" otherButtonTitles:@"Skip", nil];
         alert.tag = 1;
+        [alert show];
     }
     else
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Workers' Party News" message:title delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
         alert.tag = 2;
+        [alert show];
         
     }
     
@@ -171,7 +190,8 @@
     switch (alertView.tag) {
         case 1:
         {
-            [self openTheBrowser];
+            if(buttonIndex == 0)
+                [self openTheBrowser];
             break;
         }
         default:

@@ -268,7 +268,10 @@
 
 - (FeedDB*)getByPostID:(NSString*)postID
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"link CONTAINS[cd] %@", postID];
+    //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"link CONTAINS[cd] %@", postID];
+    // http://news.wp.sg/?p=
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"link == %@", [NSString stringWithFormat:@"http://news.wp.sg/?p=%@", postID]];
+
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:_entity

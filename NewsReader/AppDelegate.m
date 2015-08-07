@@ -34,7 +34,7 @@
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    //_postID = @"170";
+
     
     return YES;
 }
@@ -93,7 +93,7 @@
         //Show an in-app banner
         [[NSNotificationCenter defaultCenter] postNotificationName:@"PostID" object:self userInfo:userInfo] ;
 
-        
+
         
     }
 }
