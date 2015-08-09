@@ -232,6 +232,20 @@
     UIView *selection = [[UIView alloc] init];
     selection.backgroundColor = [UIColor colorWithRed:43.0/255.0f green:81.0/255.0f blue:154.0/255.0f alpha:0.4];
     cell.selectedBackgroundView = selection;
+    
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 - (IBAction)buttonAction:(UIButton*)sender

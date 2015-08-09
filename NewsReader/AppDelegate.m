@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "FeedModel.h"
 #import <Parse/Parse.h>
 #import <ParseCrashReporting/ParseCrashReporting.h>
 #import "ColorUtil.h"
@@ -134,6 +133,7 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "kecepit.NewsReader" in the application's documents directory.
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
@@ -193,6 +193,7 @@
     return _managedObjectContext;
 }
 
+
 #pragma mark - Core Data Saving support
 
 - (void)saveContext {
@@ -214,9 +215,9 @@
 {
     _requestFeed = [[HttpRequest alloc] init];
     _requestFeed.delegate = self;
-    [self refreshFeed];
-    
     _feedDBModel = [[FeedDBModel alloc] init];
+//    [self refreshFeed];
+    
 //    [_feedDBModel getAll];
 
 }

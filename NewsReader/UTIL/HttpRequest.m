@@ -28,7 +28,6 @@ dispatch_queue_t backgroundQueue;
     if(self){
         //default Init
         backgroundQueue = dispatch_queue_create("dispatch.name.req", 0);
-        _feedArr = [NSMutableArray array];
     }
     return self;
 }
@@ -36,6 +35,8 @@ dispatch_queue_t backgroundQueue;
 #pragma mark - Private Method
 - (void)getRSSFeed:(NSString*)strURL
 {
+    _feedArr = [NSMutableArray array];
+
     NSURL *url = [[NSURL alloc] initWithString:strURL];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     

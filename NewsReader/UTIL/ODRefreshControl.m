@@ -82,6 +82,7 @@ static inline CGFloat lerp(CGFloat a, CGFloat b, CGFloat p)
         _textTitle.font = [UIFont boldSystemFontOfSize:11.0f];
         _textTitle.text = @"Pull down to refresh";
         _textTitle.backgroundColor = [UIColor clearColor];
+        _textTitle.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin| UIViewAutoresizingFlexibleRightMargin;
         [self addSubview:_textTitle];
         
         _refreshing = NO;

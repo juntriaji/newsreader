@@ -42,7 +42,6 @@
 		77BBFF8D1AD8D71C00E867E4 /* refresh_200.png in Resources */ = {isa = PBXBuildFile; fileRef = 77BBFF8B1AD8D71C00E867E4 /* refresh_200.png */; };
 		77BBFF8E1AD8D71C00E867E4 /* setting_200.png in Resources */ = {isa = PBXBuildFile; fileRef = 77BBFF8C1AD8D71C00E867E4 /* setting_200.png */; };
 		77CCE30D1AD8F1FF001F086A /* FeedURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CCE30C1AD8F1FF001F086A /* FeedURL.m */; };
-		77CCE3101AD8F25F001F086A /* FeedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CCE30F1AD8F25F001F086A /* FeedModel.m */; };
 		77CCE3141AD8FF61001F086A /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CCE3131AD8FF61001F086A /* HttpRequest.m */; };
 		77CCE31A1AD91084001F086A /* FeedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CCE3191AD91084001F086A /* FeedData.m */; };
 		77CCE31E1AD91DC3001F086A /* ViewControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CCE31C1AD91DC3001F086A /* ViewControllerCell.m */; };
@@ -126,8 +125,6 @@
 		77BBFF8C1AD8D71C00E867E4 /* setting_200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = setting_200.png; path = IMAGES/setting_200.png; sourceTree = "<group>"; };
 		77CCE30B1AD8F1FF001F086A /* FeedURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedURL.h; path = COREDATA/FeedURL.h; sourceTree = "<group>"; };
 		77CCE30C1AD8F1FF001F086A /* FeedURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedURL.m; path = COREDATA/FeedURL.m; sourceTree = "<group>"; };
-		77CCE30E1AD8F25F001F086A /* FeedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedModel.h; path = COREDATA/FeedModel.h; sourceTree = "<group>"; };
-		77CCE30F1AD8F25F001F086A /* FeedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedModel.m; path = COREDATA/FeedModel.m; sourceTree = "<group>"; };
 		77CCE3121AD8FF61001F086A /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HttpRequest.h; path = UTIL/HttpRequest.h; sourceTree = "<group>"; };
 		77CCE3131AD8FF61001F086A /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HttpRequest.m; path = UTIL/HttpRequest.m; sourceTree = "<group>"; };
 		77CCE3181AD91084001F086A /* FeedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedData.h; path = UTIL/FeedData.h; sourceTree = "<group>"; };
@@ -308,8 +305,6 @@
 				77BBFF661AD8CF9700E867E4 /* NewsReader.xcdatamodeld */,
 				77CCE30B1AD8F1FF001F086A /* FeedURL.h */,
 				77CCE30C1AD8F1FF001F086A /* FeedURL.m */,
-				77CCE30E1AD8F25F001F086A /* FeedModel.h */,
-				77CCE30F1AD8F25F001F086A /* FeedModel.m */,
 				770AB4C21B63217D00316546 /* FeedDB.h */,
 				770AB4C31B63217D00316546 /* FeedDB.m */,
 				770AB4C51B63232A00316546 /* FeedDBModel.h */,
@@ -494,7 +489,6 @@
 				77E57CEE1B6CCE1800A87CD7 /* TellAFriendController.m in Sources */,
 				77CCE33A1ADA207F001F086A /* GraphUtil.m in Sources */,
 				77CCE30D1AD8F1FF001F086A /* FeedURL.m in Sources */,
-				77CCE3101AD8F25F001F086A /* FeedModel.m in Sources */,
 				770AB4C41B63217D00316546 /* FeedDB.m in Sources */,
 				77CCE3391ADA207F001F086A /* ColorUtil.m in Sources */,
 				77BBFF681AD8CF9700E867E4 /* NewsReader.xcdatamodeld in Sources */,

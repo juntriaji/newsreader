@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "FeedModel.h"
 #import "FeedURL.h"
 
 #import "FeedData.h"
@@ -91,13 +90,15 @@
 
 - (void)didRotate:(NSNotification *)notification
 {
+    
+    //_refreshControl = [[ODRefreshControl alloc] initInScrollView:_myTableView];
+    //[_refreshControl addTarget:self action:@selector(refreshAction:) forControlEvents:UIControlEventValueChanged];
     [_myTableView reloadData];
-    //[_webViewVC.webView reload];
 }
 
 - (void)refreshAction:(id)sender
 {
-    [_appDelegate requestFeed];
+    [_appDelegate refreshFeed];
     [self getCategory];
     
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerStop:) userInfo:nil repeats:NO];
@@ -117,7 +118,7 @@
 {
     [super viewWillAppear:animated];
     
-    [_appDelegate requestFeed];
+    [_appDelegate refreshFeed];
 }
 
 - (void)viewDidAppear:(BOOL)animated
