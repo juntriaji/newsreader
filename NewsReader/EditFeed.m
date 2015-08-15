@@ -135,7 +135,7 @@
         
         if(indexPath.row == 0)
         {
-            NSLog(@"%@", _dictPlist);
+            //NSLog(@"%@", _dictPlist);
             
             if([_dictPlist valueForKey:@"PushNotification"] != nil)
                 cell.buttonActive.selected = [[_dictPlist valueForKey:@"PushNotification"] isEqual:@1] ? YES : NO;

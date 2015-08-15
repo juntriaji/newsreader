@@ -137,7 +137,7 @@
 
 - (void)timerTest:(NSTimer*)sender
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //NSLog(@"%s", __PRETTY_FUNCTION__);
     //test
     _appDelegate.remoteNotifDict = @{@"aps": @{@"alert" : @"this is the Title"}, @"post_id" : @"170"};
     
