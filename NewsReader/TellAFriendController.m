@@ -78,6 +78,8 @@
 
 - (void)displayMailComposer:(NSString*)strTitle strUrl:(NSString*)strUrl
 {
+    NSLog(@"display composer");
+    
     MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
     mailComposer.mailComposeDelegate = self;
     [mailComposer setSubject:@"Workers' Party News"];
@@ -87,9 +89,18 @@
     [mailComposer setMessageBody:mutString isHTML:NO];
     mailComposer.modalTransitionStyle  = UIModalTransitionStyleCrossDissolve;
     mailComposer.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self.parentViewController.parentViewController presentViewController:mailComposer animated:YES completion:^{
-        [mailComposer.view.window addGestureRecognizer:_tap];
-    }];
+    
+    if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ){
+        
+        [self presentViewController:mailComposer animated:YES completion:^{
+            [mailComposer.view.window addGestureRecognizer:_tap];
+        }];
+    }else{
+        [self.parentViewController.parentViewController presentViewController:mailComposer animated:YES completion:^{
+            [mailComposer.view.window addGestureRecognizer:_tap];
+        }];
+    }
+    
     
 }
 
@@ -145,7 +156,9 @@
         case 2:
         {
             if([MFMailComposeViewController canSendMail])
+                
                 [self displayMailComposer:_stringTitle strUrl:_stringUrl];
+            
             else
                 [alert show];
             break;
