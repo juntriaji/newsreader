@@ -316,6 +316,9 @@
         [mutString appendString:strURL];
 
         [socialComposeController setInitialText:mutString];
+                
+        [socialComposeController addURL:[NSURL URLWithString:[strURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+        
         [self presentViewController:socialComposeController animated:YES completion:nil];
     }
     else
