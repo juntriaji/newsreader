@@ -12,9 +12,11 @@
 #import "FeedURL.h"
 #import "EditFeedCell.h"
 #import "GraphUtil.h"
+#import "AppDelegate.h"
 
 @interface EditFeed ()<UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic) AppDelegate *appDelegate;
 @property (nonatomic) IBOutlet UITableView *myTableView;
 @property (nonatomic) IBOutlet UIButton *buttonOK;
 @property (nonatomic) FeedDBModel *feedDBModel;
@@ -32,27 +34,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    _appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     _feedDBModel = [[FeedDBModel alloc] init];
-
-    //[_buttonOK setBackgroundImage:[GraphUtil imageWithColor:[UIColor redColor]] forState:UIControlStateNormal];
-    //[GraphUtil createButtonShadow:_buttonOK withBgColor:[UIColor redColor] withBorderColor:[UIColor clearColor]];
+    
     [GraphUtil createBordersWithCorderRadius:_buttonOK color:[UIColor whiteColor] radius:5];
     
     
-//    _sectionTable = @[@"Push Notification", @"News"];
-    _sectionTable = @[@"News"];
-//    NSArray *tmpArr = @[
-//                      @[
-//                      @[@"Push Notification", @"Push Notification is On"],
-//                        @[@"Sound", @"Push Notification Sound is Enabled"],
-//                      @[@"Vibrate", @"Vibrate on Push Notifications is Enabled"]],
-//                      @[
-//                          @[@"Category Preferences",@"Change preferred Categories to be displayed"]]
-//                      
-//                      ];
+    _sectionTable = @[@"Push Notification", @"News"];
+    NSArray *tmpArr = @[
+                      @[
+                      @[@"Push Notification", @"Push Notification is On"]],
+                      @[
+                          @[@"Category Preferences",@"Change preferred Categories to be displayed"]
+                          ]
+                      
+                      ];
     
-//    _contentTable = [NSMutableArray arrayWithArray:tmpArr];
-    _contentTable = [NSMutableArray array];
+    _contentTable = [NSMutableArray arrayWithArray:tmpArr];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,26 +63,26 @@
 {
     [super viewWillAppear:animated];
     //
-    //[_feedDBModel saveCategoryPref];
-    _pathPlist = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"];
-    _dictPlist = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    _pathPlist = [[_appDelegate applicationDocumentsDirectory].path stringByAppendingPathComponent:@"Pref.plist"];
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if ([manager isWritableFileAtPath:_pathPlist])
+    {
+        _dictPlist = [NSMutableDictionary dictionaryWithContentsOfFile:_pathPlist];
+    }
+    else
+    {
+        _dictPlist = [NSMutableDictionary dictionary];
+    }
 
     NSArray *catPref = [_feedDBModel getAllCatPref];
-    //NSLog(@"%@", catPref);
-    [_contentTable removeAllObjects];
     NSMutableArray *tmpArr = [NSMutableArray array];
     [catPref enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         FeedCategoryPref *pref = (FeedCategoryPref*)obj;
         NSArray *val = @[pref.categoryName, [pref.enabled stringValue]];
         [tmpArr addObject:val];
     }];
-    //[_contentTable replaceObjectAtIndex:0 withObject:tmpArr];
-    [_contentTable addObject:tmpArr];
-    //NSLog(@"%@", _contentTable);
-    //[_contentTable removeLastObject];
+    [_contentTable replaceObjectAtIndex:1 withObject:tmpArr];
     [_myTableView reloadData];
-    //NSLog(@"%s %@", __PRETTY_FUNCTION__, _dictPlist);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -114,7 +113,6 @@
     UILabel *tempLabel=[[UILabel alloc]initWithFrame:CGRectMake(5,0,300,30)];
     tempLabel.backgroundColor=[UIColor clearColor];
     tempLabel.textColor = [UIColor blackColor]; //here you can change the text color of header.
-    //FeedURL *feed = [_feeds objectAtIndex:section];
     tempLabel.text = [_sectionTable objectAtIndex:section];
     [tempView addSubview:tempLabel];
     
@@ -129,37 +127,27 @@
     {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"EditFeedCell" owner:self options:nil] firstObject];
     }
-    //NSLog(@"-- %li", indexPath.section);
     NSArray *feed = [_contentTable objectAtIndex:indexPath.section];
-    //NSLog(@"%@", feed);
+    
     if(indexPath.section == 0)
     {
-//        cell.labelTitleFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:0];
-//        cell.labelURLFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:1];
-//        
-//        
-//        cell.buttonActive.selected = !cell.buttonActive.selected;
-//        
-//        if(indexPath.row == 0)
-//        {
-//            cell.buttonActive.selected = [[_dictPlist valueForKey:@"PushNotification"] isEqual:@1] ? YES : NO;
-//
-//        }
-//        else if (indexPath.row == 1)
-//        {
-//            cell.buttonActive.selected = [[_dictPlist valueForKey:@"Sound"] isEqual:@1] ? YES : NO;
-//
-//        }
-//        else
-//        {
-//            cell.buttonActive.selected = [[_dictPlist valueForKey:@"Vibrate"] isEqual:@1] ? YES : NO;
-//            
-//        }
-//    }
-//    else{
-        //NSLog(@"%@ == > %li", [feed objectAtIndex:indexPath.row], (long)indexPath.row);
-        //FeedCategoryPref *pref = [feed objectAtIndex:indexPath.row];
-        //NSLog(@"%@", pref.categoryName);
+        //cell.buttonActive.selected = !cell.buttonActive.selected;
+        
+        if(indexPath.row == 0)
+        {
+            NSLog(@"%@", _dictPlist);
+            
+            if([_dictPlist valueForKey:@"PushNotification"] != nil)
+                cell.buttonActive.selected = [[_dictPlist valueForKey:@"PushNotification"] isEqual:@1] ? YES : NO;
+            else
+                cell.buttonActive.selected = YES;
+
+            cell.labelURLFeed.text = cell.buttonActive.selected ? @"Push Notification is On" : @"Push Notification is Off";
+        }
+        
+    }
+    else{
+        
         cell.labelTitleFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:0];
         NSString *enabled =[[feed objectAtIndex:indexPath.row] objectAtIndex:1];
         if([enabled isEqualToString:@"1"])
@@ -186,7 +174,7 @@
     EditFeedCell *cell = (EditFeedCell*)[tableView cellForRowAtIndexPath:indexPath];
     cell.buttonActive.selected = ! cell.buttonActive.selected;
     
-    if(indexPath.section == 0)
+    if(indexPath.section == 1)
     {
         
         if(cell.buttonActive.selected)
@@ -200,28 +188,17 @@
             [_feedDBModel updateCatPref:cell.labelTitleFeed.text value:@0];
         }
     }
-//    else
-//    {
-//        if(indexPath.row == 0)
-//        {
-//            NSLog(@"selected %i", cell.buttonActive.selected);
-//            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"PushNotification"];
-//            
-//        }
-//        else if (indexPath.row == 1)
-//        {
-//            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"Sound"];
-//            
-//        }
-//        else
-//        {
-//            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"Vibrate"];
-//
-//            
-//        }
-//        [_dictPlist writeToFile:_pathPlist atomically:YES];
-//        NSLog(@"%@", _dictPlist);
-//    }
+    else
+    {
+        if(indexPath.row == 0)
+        {
+            cell.labelURLFeed.text = cell.buttonActive.selected ? @"Push Notification is On" : @"Push Notification is Off";
+            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"PushNotification"];
+            
+        }
+        
+        [_dictPlist writeToFile:_pathPlist atomically:YES];
+    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 

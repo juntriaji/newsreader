@@ -13,6 +13,9 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic) NSString *pathPlist;
+@property (nonatomic) NSDictionary *dictPlist;
+
 @end
 
 @implementation AppDelegate
@@ -34,6 +37,12 @@
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
 
+    _pathPlist = [[self applicationDocumentsDirectory].path stringByAppendingPathComponent:@"Pref.plist"];
+    NSFileManager* manager = [NSFileManager defaultManager];
+    if ([manager isWritableFileAtPath:_pathPlist])
+    {
+        _dictPlist = [NSDictionary dictionaryWithContentsOfFile:_pathPlist];
+    }
     
     return YES;
 }
@@ -67,33 +76,37 @@
     //[PFPush handlePush:userInfo];
     _remoteNotifDict = userInfo;
     
-    if(application.applicationState == UIApplicationStateInactive) {
-        
-        //NSLog(@"Inactive");
-        
-        //Show the view with the content of the push
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"PostIDInactive" object:self userInfo:userInfo] ;
+    
+    if(_dictPlist != nil && [[_dictPlist valueForKey:@"PushNotification"] isEqual:@1])
+    {
+        if(application.applicationState == UIApplicationStateInactive) {
+            
+            //NSLog(@"Inactive");
+            
+            //Show the view with the content of the push
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"PostIDInactive" object:self userInfo:userInfo] ;
 
-        
-        
-    } else if (application.applicationState == UIApplicationStateBackground) {
-        
-        //NSLog(@"Background");
-        
-        //Refresh the local model
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"PostIDInactive" object:self userInfo:userInfo] ;
+            
+            
+        } else if (application.applicationState == UIApplicationStateBackground) {
+            
+            //NSLog(@"Background");
+            
+            //Refresh the local model
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"PostIDInactive" object:self userInfo:userInfo] ;
 
-        
-        
-    } else {
-        
-        //NSLog(@"Active");
-        
-        //Show an in-app banner
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"PostID" object:self userInfo:userInfo] ;
+            
+            
+        } else {
+            
+            //NSLog(@"Active");
+            
+            //Show an in-app banner
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"PostID" object:self userInfo:userInfo] ;
 
 
-        
+            
+        }
     }
 }
 
@@ -216,9 +229,6 @@
     _requestFeed = [[HttpRequest alloc] init];
     _requestFeed.delegate = self;
     _feedDBModel = [[FeedDBModel alloc] init];
-//    [self refreshFeed];
-    
-//    [_feedDBModel getAll];
 
 }
 
