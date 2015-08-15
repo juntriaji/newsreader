@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import <ParseCrashReporting/ParseCrashReporting.h>
 #import "ColorUtil.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface AppDelegate ()
 
@@ -44,8 +45,23 @@
         _dictPlist = [NSDictionary dictionaryWithContentsOfFile:_pathPlist];
     }
     
-    return YES;
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                    didFinishLaunchingWithOptions:launchOptions];
 }
+
+// FACEBOOK
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation
+            ];
+}
+
+
+
+// APN Register
 
 - (void)registerToAPNs
 {
@@ -132,6 +148,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     //[NSNotificationCenter defaultCenter] postNotificationName:@"PostID" object:self userInfo:userInfo]
+    [FBSDKAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

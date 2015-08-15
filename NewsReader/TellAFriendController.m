@@ -10,6 +10,8 @@
 #import <AddressBook/AddressBook.h>
 #import "GraphUtil.h"
 #import "ColorUtil.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
 @interface TellAFriendController ()
 
@@ -39,6 +41,12 @@
     _tap.cancelsTouchesInView = NO;
 
     self.preferredContentSize = self.view.frame.size;
+//    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+//    content.contentURL = [NSURL
+//                          URLWithString:@"https://www.facebook.com/FacebookDevelopers"];
+//    FBSDKShareButton *button = [[FBSDKShareButton alloc] init];
+//    button.shareContent = content;
+//    [self.view addSubview:button];
 }
 
 
@@ -152,7 +160,16 @@
         }
         case 4:
         {
-            [self sendViaService:SLServiceTypeFacebook stringTitle:_stringTitle stringURL:_stringUrl];
+            //[self sendViaService:SLServiceTypeFacebook stringTitle:_stringTitle stringURL:_stringUrl];
+            
+            FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+            content.contentURL = [NSURL
+                                  URLWithString:_stringUrl];
+            content.contentTitle = _stringTitle;
+            
+            [FBSDKShareDialog showFromViewController:self
+                                         withContent:content
+                                            delegate:nil];
             break;
         }
         case 5:

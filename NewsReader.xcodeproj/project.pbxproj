@@ -29,6 +29,8 @@
 		7736C9E01B26F7870072A375 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7736C9DE1B26F7870072A375 /* Parse.framework */; };
 		7736C9E21B26FBEF0072A375 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7736C9E11B26FBEF0072A375 /* ParseCrashReporting.framework */; };
 		7736C9E61B26FEEA0072A375 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7736C9E51B26FEEA0072A375 /* libstdc++.6.0.9.dylib */; };
+		7763D9011B7F4E1500F4D4B3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7763D9001B7F4E1500F4D4B3 /* FBSDKCoreKit.framework */; };
+		7763D9031B7F520F00F4D4B3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7763D9021B7F520E00F4D4B3 /* FBSDKShareKit.framework */; };
 		77A71B101B64E00700F29BCF /* FeedCategoryPref.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A71B0F1B64E00700F29BCF /* FeedCategoryPref.m */; };
 		77BBFF621AD8CF9700E867E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 77BBFF611AD8CF9700E867E4 /* main.m */; };
 		77BBFF651AD8CF9700E867E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 77BBFF641AD8CF9700E867E4 /* AppDelegate.m */; };
@@ -56,7 +58,6 @@
 		77CCE3341ADA1974001F086A /* checkbox1.png in Resources */ = {isa = PBXBuildFile; fileRef = 77CCE3321ADA1974001F086A /* checkbox1.png */; };
 		77CCE3391ADA207F001F086A /* ColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CCE3361ADA207F001F086A /* ColorUtil.m */; };
 		77CCE33A1ADA207F001F086A /* GraphUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CCE3381ADA207F001F086A /* GraphUtil.m */; };
-		77D79F2D1B697C8500854E53 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77D79F2C1B697C8500854E53 /* Settings.plist */; };
 		77D79F2F1B6C9DC300854E53 /* ic_arrow_back_white_48dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D79F2E1B6C9DC300854E53 /* ic_arrow_back_white_48dp.png */; };
 		77D79F311B6C9FE000854E53 /* ic_share_white_48dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D79F301B6C9FE000854E53 /* ic_share_white_48dp.png */; };
 		77E57CEE1B6CCE1800A87CD7 /* TellAFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E57CEC1B6CCE1800A87CD7 /* TellAFriendController.m */; };
@@ -104,6 +105,8 @@
 		7736C9DE1B26F7870072A375 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "NewsReader/parse-library-1.7.4/Parse.framework"; sourceTree = "<group>"; };
 		7736C9E11B26FBEF0072A375 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = "NewsReader/parse-library-1.7.4/ParseCrashReporting.framework"; sourceTree = "<group>"; };
 		7736C9E51B26FEEA0072A375 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		7763D9001B7F4E1500F4D4B3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "NewsReader/FacebookSDKs-iOS-20150810/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		7763D9021B7F520E00F4D4B3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "NewsReader/FacebookSDKs-iOS-20150810/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		77A71B0E1B64E00700F29BCF /* FeedCategoryPref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedCategoryPref.h; path = COREDATA/FeedCategoryPref.h; sourceTree = "<group>"; };
 		77A71B0F1B64E00700F29BCF /* FeedCategoryPref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedCategoryPref.m; path = COREDATA/FeedCategoryPref.m; sourceTree = "<group>"; };
 		77BBFF5C1AD8CF9700E867E4 /* WP News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WP News.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,7 +151,6 @@
 		77CCE3361ADA207F001F086A /* ColorUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorUtil.m; path = UTIL/ColorUtil.m; sourceTree = "<group>"; };
 		77CCE3371ADA207F001F086A /* GraphUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GraphUtil.h; path = UTIL/GraphUtil.h; sourceTree = "<group>"; };
 		77CCE3381ADA207F001F086A /* GraphUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GraphUtil.m; path = UTIL/GraphUtil.m; sourceTree = "<group>"; };
-		77D79F2C1B697C8500854E53 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		77D79F2E1B6C9DC300854E53 /* ic_arrow_back_white_48dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_arrow_back_white_48dp.png; path = IMAGES/ic_arrow_back_white_48dp.png; sourceTree = "<group>"; };
 		77D79F301B6C9FE000854E53 /* ic_share_white_48dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_share_white_48dp.png; path = IMAGES/ic_share_white_48dp.png; sourceTree = "<group>"; };
 		77E57CEB1B6CCE1800A87CD7 /* TellAFriendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TellAFriendController.h; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			files = (
 				7736C9E61B26FEEA0072A375 /* libstdc++.6.0.9.dylib in Frameworks */,
 				299E81781B008AAB00EA4472 /* AudioToolbox.framework in Frameworks */,
+				7763D9031B7F520F00F4D4B3 /* FBSDKShareKit.framework in Frameworks */,
 				299E81791B008AAB00EA4472 /* CFNetwork.framework in Frameworks */,
 				299E817A1B008AAB00EA4472 /* CoreGraphics.framework in Frameworks */,
 				7736C9DF1B26F7870072A375 /* Bolts.framework in Frameworks */,
@@ -177,6 +180,7 @@
 				299E817E1B008AAB00EA4472 /* MobileCoreServices.framework in Frameworks */,
 				299E817F1B008AAB00EA4472 /* QuartzCore.framework in Frameworks */,
 				299E81801B008AAB00EA4472 /* Security.framework in Frameworks */,
+				7763D9011B7F4E1500F4D4B3 /* FBSDKCoreKit.framework in Frameworks */,
 				299E81811B008AAB00EA4472 /* StoreKit.framework in Frameworks */,
 				299E81821B008AAB00EA4472 /* SystemConfiguration.framework in Frameworks */,
 			);
@@ -195,6 +199,8 @@
 		292BC4E21AEE0BC200FDF8F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7763D9021B7F520E00F4D4B3 /* FBSDKShareKit.framework */,
+				7763D9001B7F4E1500F4D4B3 /* FBSDKCoreKit.framework */,
 				7736C9E51B26FEEA0072A375 /* libstdc++.6.0.9.dylib */,
 				7736C9E11B26FBEF0072A375 /* ParseCrashReporting.framework */,
 				7736C9DD1B26F7870072A375 /* Bolts.framework */,
@@ -257,7 +263,6 @@
 				770AB4CA1B63A95A00316546 /* style.css */,
 				77BBFF601AD8CF9700E867E4 /* Info.plist */,
 				77BBFF611AD8CF9700E867E4 /* main.m */,
-				77D79F2C1B697C8500854E53 /* Settings.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -452,7 +457,6 @@
 				77CCE3301ADA18F2001F086A /* EditFeedCell.xib in Resources */,
 				770AB4CB1B63A95A00316546 /* style.css in Resources */,
 				77BBFF8A1AD8D45E00E867E4 /* news_logo_200.png in Resources */,
-				77D79F2D1B697C8500854E53 /* Settings.plist in Resources */,
 				77BBFF701AD8CF9700E867E4 /* Images.xcassets in Resources */,
 				292BC4F01AEE19C700FDF8F5 /* logo_180.png in Resources */,
 				77E57CF31B6CCEBC00A87CD7 /* email_48.png in Resources */,
@@ -625,6 +629,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/NewsReader/parse-library-1.7.4",
+					"$(PROJECT_DIR)/NewsReader/FacebookSDKs-iOS-20150810",
 				);
 				INFOPLIST_FILE = NewsReader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -643,6 +648,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/NewsReader/parse-library-1.7.4",
+					"$(PROJECT_DIR)/NewsReader/FacebookSDKs-iOS-20150810",
 				);
 				INFOPLIST_FILE = NewsReader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
