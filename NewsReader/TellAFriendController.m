@@ -86,7 +86,9 @@
     NSMutableString *mutString = [NSMutableString stringWithString:strTitle];
     [mutString appendString:@". Read more at "];
     [mutString appendString:strUrl];
+    
     [mailComposer setMessageBody:mutString isHTML:NO];
+
     mailComposer.modalTransitionStyle  = UIModalTransitionStyleCrossDissolve;
     mailComposer.modalPresentationStyle = UIModalPresentationFormSheet;
     
