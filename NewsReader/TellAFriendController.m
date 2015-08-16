@@ -78,7 +78,7 @@
 
 - (void)displayMailComposer:(NSString*)strTitle strUrl:(NSString*)strUrl
 {
-    NSLog(@"display composer");
+    //NSLog(@"display composer");
     
     MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
     mailComposer.mailComposeDelegate = self;
