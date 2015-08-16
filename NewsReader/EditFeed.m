@@ -44,7 +44,7 @@
     _sectionTable = @[@"Push Notification", @"News"];
     NSArray *tmpArr = @[
                       @[
-                      @[@"Push Notification", @"Push Notification is On"]],
+                      @[@"Push Setting", @"Push Notification is On"]],
                       @[
                           @[@"Category Preferences",@"Change preferred Categories to be displayed"]
                           ]
@@ -141,7 +141,7 @@
                 cell.buttonActive.selected = [[_dictPlist valueForKey:@"PushNotification"] isEqual:@1] ? YES : NO;
             else
                 cell.buttonActive.selected = YES;
-
+            cell.labelTitleFeed.text = @"Push Setting";
             cell.labelURLFeed.text = cell.buttonActive.selected ? @"Push Notification is On" : @"Push Notification is Off";
         }
         
