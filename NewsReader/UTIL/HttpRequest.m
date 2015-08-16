@@ -39,6 +39,7 @@ dispatch_queue_t backgroundQueue;
 
     NSURL *url = [[NSURL alloc] initWithString:strURL];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request.timeoutInterval = 20.0;
     
     dispatch_async(backgroundQueue, ^{
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
