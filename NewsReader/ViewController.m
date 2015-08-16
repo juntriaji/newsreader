@@ -104,9 +104,15 @@
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerStop:) userInfo:nil repeats:NO];
 }
 
-- (void)timerStop:(id)sender
+- (void)timerStop:(NSTimer*)sender
 {
-    [_refreshControl endRefreshing];
+    
+    if([sender isValid])
+    {
+        
+        [_refreshControl endRefreshing];
+        [sender invalidate];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -177,7 +183,7 @@
     if(db == nil)
     {
         [_appDelegate refreshFeed];
-        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerGetPostID) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerGetPostID:) userInfo:nil repeats:NO];
     }
     else
     {
@@ -201,13 +207,22 @@
 }
 
 
-- (void)timerGetPostID
+- (void)timerGetPostID:(NSTimer*)sender
 {
-    FeedDB *db = [_feedDBModel getByPostID:[_appDelegate.remoteNotifDict valueForKey:@"post_id"]];
-    if(db != nil)
-        [self showwebView:db];
-    else
-        [[[UIAlertView alloc] initWithTitle:@"Workers' Party News" message:@"Error, can not fetch the content." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    if([sender isValid])
+    {
+        [sender invalidate];
+        FeedDB *db = [_feedDBModel getByPostID:[_appDelegate.remoteNotifDict valueForKey:@"post_id"]];
+        if(db != nil)
+        {
+            [self showwebView:db];
+        }
+        else
+        {
+            [[[UIAlertView alloc] initWithTitle:@"Workers' Party News" message:@"Error, can not fetch the content." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        }
+        
+    }
 }
 
 - (IBAction)buttonAction:(UIButton*)sender
