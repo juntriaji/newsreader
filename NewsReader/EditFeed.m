@@ -41,17 +41,17 @@
     [GraphUtil createBordersWithCorderRadius:_buttonOK color:[UIColor whiteColor] radius:5];
     
     
-    _sectionTable = @[@"Push Notification", @"News"];
-    NSArray *tmpArr = @[
-                      @[
-                      @[@"Push Setting", @"Push Notification is On"]],
-                      @[
-                          @[@"Category Preferences",@"Change preferred Categories to be displayed"]
-                          ]
-                      
-                      ];
+    _sectionTable = @[@"News"];
+//    NSArray *tmpArr = @[
+//                      @[
+//                      @[@"Push Setting", @"Push Notification is On"]],
+//                      @[
+//                          @[@"Category Preferences",@"Change preferred Categories to be displayed"]
+//                          ]
+//                      
+//                      ];
     
-    _contentTable = [NSMutableArray arrayWithArray:tmpArr];
+    _contentTable = [NSMutableArray array];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,6 +73,9 @@
     {
         _dictPlist = [NSMutableDictionary dictionary];
     }
+    
+    
+    [_contentTable removeAllObjects];
 
     NSArray *catPref = [_feedDBModel getAllCatPref];
     NSMutableArray *tmpArr = [NSMutableArray array];
@@ -81,7 +84,7 @@
         NSArray *val = @[pref.categoryName, [pref.enabled stringValue]];
         [tmpArr addObject:val];
     }];
-    [_contentTable replaceObjectAtIndex:1 withObject:tmpArr];
+    [_contentTable addObject:tmpArr];
     [_myTableView reloadData];
 }
 
@@ -129,25 +132,25 @@
     }
     NSArray *feed = [_contentTable objectAtIndex:indexPath.section];
     
-    if(indexPath.section == 0)
-    {
-        //cell.buttonActive.selected = !cell.buttonActive.selected;
-        
-        if(indexPath.row == 0)
-        {
-            //NSLog(@"%@", _dictPlist);
-            
-            if([_dictPlist valueForKey:@"PushNotification"] != nil)
-                cell.buttonActive.selected = [[_dictPlist valueForKey:@"PushNotification"] isEqual:@1] ? YES : NO;
-            else
-                cell.buttonActive.selected = YES;
-            cell.labelTitleFeed.text = @"Push Setting";
-            cell.labelURLFeed.text = cell.buttonActive.selected ? @"Push Notification is On" : @"Push Notification is Off";
-        }
-        
-    }
-    else{
-        
+//    if(indexPath.section == 0)
+//    {
+//        //cell.buttonActive.selected = !cell.buttonActive.selected;
+//        
+//        if(indexPath.row == 0)
+//        {
+//            //NSLog(@"%@", _dictPlist);
+//            
+//            if([_dictPlist valueForKey:@"PushNotification"] != nil)
+//                cell.buttonActive.selected = [[_dictPlist valueForKey:@"PushNotification"] isEqual:@1] ? YES : NO;
+//            else
+//                cell.buttonActive.selected = YES;
+//            cell.labelTitleFeed.text = @"Push Setting";
+//            cell.labelURLFeed.text = cell.buttonActive.selected ? @"Push Notification is On" : @"Push Notification is Off";
+//        }
+//        
+//    }
+//    else{
+    
         cell.labelTitleFeed.text = [[feed objectAtIndex:indexPath.row] objectAtIndex:0];
         NSString *enabled =[[feed objectAtIndex:indexPath.row] objectAtIndex:1];
         if([enabled isEqualToString:@"1"])
@@ -160,7 +163,7 @@
             cell.labelURLFeed.text = @"Disabled";
         }
         cell.buttonActive.selected = [enabled isEqualToString:@"1"] ? YES : NO;
-    }
+//    }
     
     return cell;
 }
@@ -174,9 +177,9 @@
     EditFeedCell *cell = (EditFeedCell*)[tableView cellForRowAtIndexPath:indexPath];
     cell.buttonActive.selected = ! cell.buttonActive.selected;
     
-    if(indexPath.section == 1)
-    {
-        
+//    if(indexPath.section == 1)
+//    {
+    
         if(cell.buttonActive.selected)
         {
             cell.labelURLFeed.text = @"Enabled";
@@ -187,18 +190,18 @@
             cell.labelURLFeed.text = @"Disabled";
             [_feedDBModel updateCatPref:cell.labelTitleFeed.text value:@0];
         }
-    }
-    else
-    {
-        if(indexPath.row == 0)
-        {
-            cell.labelURLFeed.text = cell.buttonActive.selected ? @"Push Notification is On" : @"Push Notification is Off";
-            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"PushNotification"];
-            
-        }
-        
-        [_dictPlist writeToFile:_pathPlist atomically:YES];
-    }
+//    }
+//    else
+//    {
+//        if(indexPath.row == 0)
+//        {
+//            cell.labelURLFeed.text = cell.buttonActive.selected ? @"Push Notification is On" : @"Push Notification is Off";
+//            [_dictPlist setValue:[NSNumber numberWithBool:cell.buttonActive.selected] forKey:@"PushNotification"];
+//            
+//        }
+//        
+//        [_dictPlist writeToFile:_pathPlist atomically:YES];
+//    }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 

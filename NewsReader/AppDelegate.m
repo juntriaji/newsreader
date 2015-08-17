@@ -91,10 +91,8 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     //[PFPush handlePush:userInfo];
     _remoteNotifDict = userInfo;
-    
-    
-    if(_dictPlist != nil && [[_dictPlist valueForKey:@"PushNotification"] isEqual:@1])
-    {
+//    if(_dictPlist != nil && [[_dictPlist valueForKey:@"PushNotification"] isEqual:@1])
+//    {
         if(application.applicationState == UIApplicationStateInactive) {
             
             //NSLog(@"Inactive");
@@ -119,11 +117,8 @@
             
             //Show an in-app banner
             [[NSNotificationCenter defaultCenter] postNotificationName:@"PostID" object:self userInfo:userInfo] ;
-
-
-            
         }
-    }
+//    }
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
