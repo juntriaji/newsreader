@@ -93,6 +93,11 @@
     _remoteNotifDict = userInfo;
 //    if(_dictPlist != nil && [[_dictPlist valueForKey:@"PushNotification"] isEqual:@1])
 //    {
+    
+        NSString *postId = [userInfo objectForKey:@"postId"];
+        
+        [self savePostId:postId];
+    
         if(application.applicationState == UIApplicationStateInactive) {
             
             //NSLog(@"Inactive");
@@ -255,6 +260,19 @@
     [_feedDBModel bulkSaveData:datas];
 }
 
-
+#pragma mark - save current post id
+- (void)savePostId:(NSString*)postId
+{
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    
+    [preferences setObject:postId forKey:@"postId"];
+    
+    const BOOL didSave = [preferences synchronize];
+    
+    if (!didSave)
+    {
+        //  Couldn't save (I've never seen this happen in real world testing)
+    }
+}
 
 @end

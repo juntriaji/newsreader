@@ -175,16 +175,16 @@
         }
         case 4:
         {
-            //[self sendViaService:SLServiceTypeFacebook stringTitle:_stringTitle stringURL:_stringUrl];
+            [self sendViaService:SLServiceTypeFacebook stringTitle:_stringTitle stringURL:_stringUrl];
             
-            FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-            content.contentURL = [NSURL
-                                  URLWithString:_stringUrl];
-            content.contentTitle = _stringTitle;
+            //FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+            //content.contentURL = [NSURL
+            //                      URLWithString:_stringUrl];
+            //content.contentTitle = _stringTitle;
             
-            [FBSDKShareDialog showFromViewController:self
-                                         withContent:content
-                                            delegate:nil];
+            //[FBSDKShareDialog showFromViewController:self
+            //                             withContent:content
+            //                                delegate:nil];
             break;
         }
         case 5:
