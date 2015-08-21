@@ -10,8 +10,8 @@
 #import <AddressBook/AddressBook.h>
 #import "GraphUtil.h"
 #import "ColorUtil.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKShareKit/FBSDKShareKit.h>
+//#import <FBSDKCoreKit/FBSDKCoreKit.h>
+//#import <FBSDKShareKit/FBSDKShareKit.h>
 
 @interface TellAFriendController ()
 
@@ -185,6 +185,7 @@
             //[FBSDKShareDialog showFromViewController:self
             //                             withContent:content
             //                                delegate:nil];
+            
             break;
         }
         case 5:

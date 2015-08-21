@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import <ParseCrashReporting/ParseCrashReporting.h>
 #import "ColorUtil.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
+//#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface AppDelegate ()
 
@@ -45,18 +45,23 @@
         _dictPlist = [NSDictionary dictionaryWithContentsOfFile:_pathPlist];
     }
     
-    return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                    didFinishLaunchingWithOptions:launchOptions];
+    //return [[FBSDKApplicationDelegate sharedInstance] application:application
+    //                                didFinishLaunchingWithOptions:launchOptions];
+    
+    return YES;
+    
 }
 
 // FACEBOOK
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                          openURL:url
-                                                sourceApplication:sourceApplication
-                                                       annotation:annotation
-            ];
+    //return [[FBSDKApplicationDelegate sharedInstance] application:application
+    //                                                      openURL:url
+    //                                            sourceApplication:sourceApplication
+    //                                                   annotation:annotation
+    //        ];
+    
+    return YES;
 }
 
 
@@ -94,9 +99,14 @@
 //    if(_dictPlist != nil && [[_dictPlist valueForKey:@"PushNotification"] isEqual:@1])
 //    {
     
+        //save captured post id into persistence
+    
         NSString *postId = [userInfo objectForKey:@"postId"];
-        
-        [self savePostId:postId];
+
+        NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    
+        [preferences setObject:postId forKey:@"postId"];
+    
     
         if(application.applicationState == UIApplicationStateInactive) {
             
@@ -148,7 +158,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     //[NSNotificationCenter defaultCenter] postNotificationName:@"PostID" object:self userInfo:userInfo]
-    [FBSDKAppEvents activateApp];
+    //[FBSDKAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -258,21 +268,6 @@
 - (void)getRSSFeedData:(NSArray *)datas
 {
     [_feedDBModel bulkSaveData:datas];
-}
-
-#pragma mark - save current post id
-- (void)savePostId:(NSString*)postId
-{
-    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
-    
-    [preferences setObject:postId forKey:@"postId"];
-    
-    const BOOL didSave = [preferences synchronize];
-    
-    if (!didSave)
-    {
-        //  Couldn't save (I've never seen this happen in real world testing)
-    }
 }
 
 @end
